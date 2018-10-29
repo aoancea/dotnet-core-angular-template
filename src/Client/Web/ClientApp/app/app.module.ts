@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
-import { PeriodicElementListComponent } from './periodic-element/periodic-element.component';
+import { PeriodicElementListComponent } from './periodic-element/periodic-element-list/periodic-element-list.component';
 
 import { AngularMaterialModule } from './shared/angular-material.module';
 import { CoreModule } from './core/core.module';

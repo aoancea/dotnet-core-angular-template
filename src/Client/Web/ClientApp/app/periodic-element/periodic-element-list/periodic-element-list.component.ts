@@ -1,17 +1,12 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export interface PeriodicElement {
-    name: string;
-    position: number;
-    weight: number;
-    symbol: string;
-}
+import { PeriodicElement } from './../periodic-element.models';
 
 @Component({
-    selector: 'app-periodic-element',
-    templateUrl: './periodic-element.component.html',
-    styleUrls: ['./periodic-element.component.css']
+    selector: 'app-periodic-element-list',
+    templateUrl: './periodic-element-list.component.html',
+    styleUrls: ['./periodic-element-list.component.css']
 })
 export class PeriodicElementListComponent implements OnInit {
 
