@@ -1,4 +1,4 @@
-﻿namespace NetCore21Angular.Web.Models
+﻿namespace NetCore21Angular.Client.Web.Models
 {
     public class PeriodicElement
     {

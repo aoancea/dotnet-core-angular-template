@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Runtime.Mapper;
 
-namespace NetCore21Angular.Web.Controllers
+namespace NetCore21Angular.Client.Web.Controllers
 {
     public class PeriodicElementController : Controller
     {

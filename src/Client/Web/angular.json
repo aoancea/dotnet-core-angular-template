@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "NetCore21Angular.Web": {
+    "NetCore21Angular.Client.Web": {
       "root": "",
       "sourceRoot": "ClientApp",
       "projectType": "application",
@@ -49,18 +49,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "NetCore21Angular.Web:build"
+            "browserTarget": "NetCore21Angular.Client.Web:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "NetCore21Angular.Web:build:production"
+              "browserTarget": "NetCore21Angular.Client.Web:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "NetCore21Angular.Web:build"
+            "browserTarget": "NetCore21Angular.Client.Web:build"
           }
         },
         "test": {
@@ -94,7 +94,7 @@
         }
       }
     },
-    "NetCore21Angular.Web-e2e": {
+    "NetCore21Angular.Client.Web-e2e": {
       "root": "e2e",
       "sourceRoot": "e2e",
       "projectType": "application",
@@ -103,7 +103,7 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "./protractor.conf.js",
-            "devServerTarget": "NetCore21Angular.Web:serve"
+            "devServerTarget": "NetCore21Angular.Client.Web:serve"
           }
         },
         "lint": {
@@ -120,7 +120,7 @@
       }
     }
   },
-  "defaultProject": "NetCore21Angular.Web",
+  "defaultProject": "NetCore21Angular.Client.Web",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",

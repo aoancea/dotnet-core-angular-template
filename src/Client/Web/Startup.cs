@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NetCore21Angular.Web
+namespace NetCore21Angular.Client.Web
 {
     public class Startup
     {

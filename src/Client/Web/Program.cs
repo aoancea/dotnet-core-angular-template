@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace NetCore21Angular.Web
+namespace NetCore21Angular.Client.Web
 {
     public class Program
     {
