@@ -51,9 +51,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\NetCore21Angular.Database.csproj" />
-    <ProjectReference Include="..\Manager\Configuration\NetCore21Angular.Manager.Configuration.csproj" />
-    <ProjectReference Include="..\Resource\Configuration\NetCore21Angular.Resource.Configuration.csproj" />
+    <ProjectReference Include="..\..\Database\NetCore21Angular.Database.csproj" />
+    <ProjectReference Include="..\..\Manager\Configuration\NetCore21Angular.Manager.Configuration.csproj" />
+    <ProjectReference Include="..\..\Resource\Configuration\NetCore21Angular.Resource.Configuration.csproj" />
   </ItemGroup>
 
   <ItemGroup>
