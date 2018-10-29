@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCore21Angular.Database;
 
 namespace NetCore21Angular.Database.Migrations
 {
     [DbContext(typeof(NetCore21AngularDbContext))]
-    partial class NetCore21AngularDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181029140238_Add_PeriodicElement_Table")]
+    partial class Add_PeriodicElement_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
