@@ -1,15 +1,21 @@
 ﻿import { NgModule } from '@angular/core';
 
 import {
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatListModule,
+    MatTableModule
 } from '@angular/material';
 
 @NgModule({
     imports: [
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatListModule,
+        MatTableModule
     ],
     exports: [
-        MatSlideToggleModule
+        MatSlideToggleModule,
+        MatListModule,
+        MatTableModule
     ],
     providers: [
     ],
