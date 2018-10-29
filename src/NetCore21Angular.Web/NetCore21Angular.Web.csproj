@@ -40,7 +40,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\shared\angular-material.module.ts" />
     <None Remove="npm-debug.log" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\shared\angular-material.module.ts" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
