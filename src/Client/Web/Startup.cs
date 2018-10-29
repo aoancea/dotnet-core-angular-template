@@ -5,6 +5,15 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
+using Unity;
+using Unity.Injection;
+using Unity.Interception.ContainerIntegration;
+using Unity.Interception.InterceptionBehaviors;
+using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
+using Unity.Interception.PolicyInjection.Pipeline;
 
 namespace NetCore21Angular.Client.Web
 {
@@ -81,6 +90,65 @@ namespace NetCore21Angular.Client.Web
 
             // Resource
             services.AddTransient<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>();
+        }
+
+        private void Configure_CompositionRoot_Test(IServiceCollection services)
+        {
+            UnityContainer container = new UnityContainer();
+            container.AddNewExtension<Interception>();
+
+            // Database
+            container.RegisterType<Database.NetCore21AngularDbContext>(new InjectionFactory((x) => services.BuildServiceProvider().GetService<Database.NetCore21AngularDbContext>()));
+
+            // Resource
+            container.RegisterType<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<TransactionInterceptionBehavior>());
+            services.AddTransient((x) => container.Resolve<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource>());
+
+            // Engine
+
+
+            // Manager
+            container.RegisterType<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager, Manager.Configuration.Chemistry.PeriodicElementManager>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<TransactionInterceptionBehavior>());
+            services.AddTransient((x) => container.Resolve<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager>());
+        }
+
+        private class TransactionInterceptionBehavior : IInterceptionBehavior
+        {
+            public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
+            {
+                MethodInfo methodInfo = input.MethodBase as MethodInfo;
+
+                TransactionFlowAttribute transactionFlowAttribute = methodInfo.GetCustomAttribute<TransactionFlowAttribute>();
+
+                var result = getNext()(input, getNext);
+
+                return result;
+            }
+
+            public IEnumerable<Type> GetRequiredInterfaces()
+            {
+                return Type.EmptyTypes;
+            }
+
+            public bool WillExecute { get { return true; } }
+        }
+
+
+        public class TransactionFlowAttribute : Attribute
+        {
+            public TransactionFlowOption TransactionFlowOption { get; }
+
+            public TransactionFlowAttribute(TransactionFlowOption transactionFlowOption)
+            {
+                TransactionFlowOption = transactionFlowOption;
+            }
+        }
+
+        public enum TransactionFlowOption
+        {
+            Mandatory,
+            Allowed,
+            NotAllowed
         }
     }
 }
