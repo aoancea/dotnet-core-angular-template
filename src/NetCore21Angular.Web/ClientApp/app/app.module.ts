@@ -13,6 +13,7 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { CowsComponent } from './cows/cows.component';
 
 import { AngularMaterialModule } from './shared/angular-material.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
     declarations: [
@@ -33,10 +34,12 @@ import { AngularMaterialModule } from './shared/angular-material.module';
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'cows', component: CowsComponent },
         ]),
-        AngularMaterialModule
+        AngularMaterialModule,
+        CoreModule
     ],
     exports: [
-        AngularMaterialModule
+        AngularMaterialModule,
+        CoreModule
     ],
     providers: [],
     bootstrap: [AppComponent]

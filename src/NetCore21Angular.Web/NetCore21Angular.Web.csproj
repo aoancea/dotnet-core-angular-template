@@ -40,11 +40,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\core\core.module.ts" />
+    <None Remove="ClientApp\app\core\services\http-request-interceptor.ts" />
     <None Remove="ClientApp\app\shared\angular-material.module.ts" />
     <None Remove="npm-debug.log" />
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\core\core.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\core\services\http-request-interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\angular-material.module.ts" />
   </ItemGroup>
 
