@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Database", "Database", "{80BE29F8-485B-43B3-9D08-631DD72D592B}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore21Angular.Database", "Database\NetCore21Angular.Database.csproj", "{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,9 +29,16 @@ Global
 		{215359B2-B2E5-4734-B40A-BE3D43501966}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{215359B2-B2E5-4734-B40A-BE3D43501966}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{215359B2-B2E5-4734-B40A-BE3D43501966}.Release|Any CPU.Build.0 = Release|Any CPU
+		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8} = {80BE29F8-485B-43B3-9D08-631DD72D592B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16918FB6-4931-4E1E-8738-E211F12A2C5B}
