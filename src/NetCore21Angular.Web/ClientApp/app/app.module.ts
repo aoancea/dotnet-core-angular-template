@@ -10,7 +10,7 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
-import { CowsComponent } from './cows/cows.component';
+import { PeriodicElementListComponent } from './periodic-element/periodic-element.component';
 
 import { AngularMaterialModule } from './shared/angular-material.module';
 import { CoreModule } from './core/core.module';
@@ -22,7 +22,7 @@ import { CoreModule } from './core/core.module';
         HomeComponent,
         CounterComponent,
         FetchDataComponent,
-        CowsComponent
+        PeriodicElementListComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,7 +32,7 @@ import { CoreModule } from './core/core.module';
             { path: '', component: HomeComponent, pathMatch: 'full' },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'cows', component: CowsComponent },
+            { path: 'periodic-elements', component: PeriodicElementListComponent },
         ]),
         AngularMaterialModule,
         CoreModule

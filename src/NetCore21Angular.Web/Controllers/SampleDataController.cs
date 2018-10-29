@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace NetCore21Angular.Web.Controllers
 {
-    [Route("api/[controller]")]
     public class SampleDataController : Controller
     {
         private static string[] Summaries = new[]
@@ -14,7 +13,6 @@ namespace NetCore21Angular.Web.Controllers
             "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
         };
 
-        [HttpGet("[action]")]
         public IEnumerable<WeatherForecast> WeatherForecasts()
         {
             var rng = new Random();
