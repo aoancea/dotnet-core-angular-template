@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +30,8 @@ namespace NetCore21Angular.Web
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            Configure_CompositionRoot(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,6 +70,17 @@ namespace NetCore21Angular.Web
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
+        }
+
+        private void Configure_CompositionRoot(IServiceCollection services)
+        {
+            // Manager
+            services.AddTransient<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager, Manager.Configuration.Chemistry.PeriodicElementManager>();
+
+            // Engine
+
+            // Resource
+            services.AddTransient<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>();
         }
     }
 }
