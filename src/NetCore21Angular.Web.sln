@@ -24,6 +24,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		..\.gitignore = ..\.gitignore
 	EndProjectSection
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore21Angular.Resource.Configuration", "Resource\Configuration\NetCore21Angular.Resource.Configuration.csproj", "{2C69A73A-BC6B-4F2F-AD29-EC995FA61E7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,12 +40,17 @@ Global
 		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2C69A73A-BC6B-4F2F-AD29-EC995FA61E7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2C69A73A-BC6B-4F2F-AD29-EC995FA61E7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2C69A73A-BC6B-4F2F-AD29-EC995FA61E7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2C69A73A-BC6B-4F2F-AD29-EC995FA61E7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{909B2B22-9E1F-4BD3-AB58-ADB5B3A77DB8} = {80BE29F8-485B-43B3-9D08-631DD72D592B}
+		{2C69A73A-BC6B-4F2F-AD29-EC995FA61E7F} = {92B302E7-35C0-42FF-B06F-4FDD0B309C63}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16918FB6-4931-4E1E-8738-E211F12A2C5B}
