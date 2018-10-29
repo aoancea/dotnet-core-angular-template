@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Linq;
+using Runtime.Mapper;
 
 namespace NetCore21Angular.Web.Controllers
 {
@@ -14,14 +14,7 @@ namespace NetCore21Angular.Web.Controllers
 
         public Models.PeriodicElement[] ListPeriodicElements()
         {
-            // TODO - Web - Use DeepCopyTo<T[]>();
-            return periodicElementManager.List().Select(x => new Models.PeriodicElement
-            {
-                Name = x.Name,
-                Position = x.Position,
-                Symbol = x.Symbol,
-                Weight = x.Weight
-            }).ToArray();
+            return periodicElementManager.List().DeepCopyTo<Models.PeriodicElement[]>();
         }
     }
 }

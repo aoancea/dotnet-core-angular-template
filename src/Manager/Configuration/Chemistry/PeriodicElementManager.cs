@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using Runtime.Mapper;
 
 namespace NetCore21Angular.Manager.Configuration.Chemistry
 {
@@ -13,15 +13,7 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
 
         public Contract.PeriodicElement[] List()
         {
-            // TODO - Manager - Configuration - Use DeepCopyTo<T[]>();
-            return periodicElementResource.List().Select(x => new Contract.PeriodicElement
-            {
-                ID = x.ID,
-                Name = x.Name,
-                Position = x.Position,
-                Symbol = x.Symbol,
-                Weight = x.Weight
-            }).ToArray();
+            return periodicElementResource.List().DeepCopyTo<Contract.PeriodicElement[]>();
         }
     }
 }

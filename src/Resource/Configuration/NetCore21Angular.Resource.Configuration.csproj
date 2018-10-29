@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Runtime.Mapper" Version="0.0.3-alpha" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Database\NetCore21Angular.Database.csproj" />
   </ItemGroup>
 

@@ -1,4 +1,5 @@
 ﻿using NetCore21Angular.Database;
+using Runtime.Mapper;
 using System;
 using System.Linq;
 
@@ -35,15 +36,7 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
                 };
             }
 
-            // TODO - Resource - Configuration - Use DeepCopyTo<T[]>();
-            return netCore21AngularDbContext.PeriodicElement.ToArray().Select(x => new Contract.PeriodicElement
-            {
-                ID = x.ID,
-                Name = x.Name,
-                Position = x.Position,
-                Symbol = x.Symbol,
-                Weight = x.Weight
-            }).ToArray();
+            return netCore21AngularDbContext.PeriodicElement.ToArray().DeepCopyTo<Contract.PeriodicElement[]>();
         }
     }
 }
