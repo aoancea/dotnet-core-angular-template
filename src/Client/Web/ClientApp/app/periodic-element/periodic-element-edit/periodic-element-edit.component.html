@@ -1,3 +1,26 @@
 <p>
-    periodic-element-edit works!
+    Add/Edit periodic element
 </p>
+
+
+<div class="example-container">
+    <mat-form-field>
+        <input matInput placeholder="Position" [(ngModel)]="position">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Name" [(ngModel)]="name">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Weight" [(ngModel)]="weight">
+    </mat-form-field>
+
+    <mat-form-field>
+        <input matInput placeholder="Symbol" [(ngModel)]="symbol">
+    </mat-form-field>
+</div>
+
+<div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="savePeriodicElement()">Save</button>
+</div>

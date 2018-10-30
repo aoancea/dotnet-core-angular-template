@@ -10,7 +10,7 @@ import { PeriodicElement } from './../periodic-element.models';
 })
 export class PeriodicElementListComponent implements OnInit {
 
-    public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+    public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'action'];
     public periodicElements: PeriodicElement[] = [];
 
     constructor(http: HttpClient, @Inject('BASE_URL') baseUrl: string) {

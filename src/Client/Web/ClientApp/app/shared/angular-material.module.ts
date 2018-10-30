@@ -3,19 +3,28 @@
 import {
     MatSlideToggleModule,
     MatListModule,
-    MatTableModule
+    MatTableModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule
 } from '@angular/material';
 
 @NgModule({
     imports: [
         MatSlideToggleModule,
         MatListModule,
-        MatTableModule
+        MatTableModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule
     ],
     exports: [
         MatSlideToggleModule,
         MatListModule,
-        MatTableModule
+        MatTableModule,
+        MatFormFieldModule,
+        MatSelectModule,
+        MatInputModule
     ],
     providers: [
     ],

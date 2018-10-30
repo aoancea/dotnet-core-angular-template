@@ -7,9 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PeriodicElementEditComponent implements OnInit {
 
+    public position: string = "test";
+    public name: string = "test";
+    public weight: string = "test";
+    public symbol: string = "test";
+
     constructor() { }
 
     ngOnInit() {
     }
-
 }
