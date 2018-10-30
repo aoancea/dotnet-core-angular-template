@@ -11,6 +11,7 @@ import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
 import { PeriodicElementListComponent } from './periodic-element/periodic-element-list/periodic-element-list.component';
+import { PeriodicElementEditComponent } from './periodic-element/periodic-element-edit/periodic-element-edit.component';
 
 import { AngularMaterialModule } from './shared/angular-material.module';
 import { CoreModule } from './core/core.module';
@@ -22,7 +23,8 @@ import { CoreModule } from './core/core.module';
         HomeComponent,
         CounterComponent,
         FetchDataComponent,
-        PeriodicElementListComponent
+        PeriodicElementListComponent,
+        PeriodicElementEditComponent
     ],
     imports: [
         BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -33,6 +35,7 @@ import { CoreModule } from './core/core.module';
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'periodic-elements', component: PeriodicElementListComponent },
+            { path: 'periodic-element-edit', component: PeriodicElementEditComponent },
         ]),
         AngularMaterialModule,
         CoreModule
