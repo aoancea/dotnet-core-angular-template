@@ -4,5 +4,7 @@
     public interface IPeriodicElementResource
     {
         PeriodicElement[] List();
+
+        PeriodicElement DetailPeriodicElementByPosition(int position);
     }
 }

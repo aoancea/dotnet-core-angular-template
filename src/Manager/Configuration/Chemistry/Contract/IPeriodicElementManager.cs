@@ -3,5 +3,7 @@
     public interface IPeriodicElementManager
     {
         PeriodicElement[] List();
+
+        PeriodicElement GetPeriodicElementByPosition(int position);
     }
 }

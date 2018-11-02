@@ -4,7 +4,7 @@ import { Injectable, Inject } from '@angular/core';
 import { PeriodicElement } from './periodic-element.models';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class PeriodicElementService {
 
@@ -12,5 +12,13 @@ export class PeriodicElementService {
 
     listPeriodicElements() {
         return this.http.get<PeriodicElement[]>(`${this.baseUrl}PeriodicElement/ListPeriodicElements`);
+    }
+
+    getPeriodicElement(position: number) {
+        return this.http.get<PeriodicElement>(`${this.baseUrl}PeriodicElement/GetPeriodicElement?position=${position}`);
+    }
+
+    createPeriodicElement(periodicElement: PeriodicElement) {
+        this.http.post<PeriodicElement[]>(`${this.baseUrl}PeriodicElement/CreatePeriodicElement`, periodicElement);
     }
 }

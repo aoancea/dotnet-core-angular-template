@@ -38,5 +38,10 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
 
             return netCore21AngularDbContext.PeriodicElement.ToArray().DeepCopyTo<Contract.PeriodicElement[]>();
         }
+
+        public Contract.PeriodicElement DetailPeriodicElementByPosition(int position)
+        {
+            return netCore21AngularDbContext.PeriodicElement.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElement>();
+        }
     }
 }
