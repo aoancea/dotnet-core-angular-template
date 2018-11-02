@@ -16,7 +16,7 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
 
         public Contract.PeriodicElement[] List()
         {
-            Database.Models.PeriodicElement[] dbPeriodicElements = netCore21AngularDbContext.PeriodicElement.ToArray();
+            Database.Models.PeriodicElement[] dbPeriodicElements = netCore21AngularDbContext.PeriodicElements.ToArray();
 
             // Logic for fetching data is the resposibility of the Resource => thus we have this here!
             if (dbPeriodicElements.Length == 0)
@@ -36,12 +36,12 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
                 };
             }
 
-            return netCore21AngularDbContext.PeriodicElement.ToArray().DeepCopyTo<Contract.PeriodicElement[]>();
+            return netCore21AngularDbContext.PeriodicElements.ToArray().DeepCopyTo<Contract.PeriodicElement[]>();
         }
 
         public Contract.PeriodicElement DetailPeriodicElementByPosition(int position)
         {
-            return netCore21AngularDbContext.PeriodicElement.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElement>();
+            return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElement>();
         }
     }
 }

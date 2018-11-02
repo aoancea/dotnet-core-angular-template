@@ -5,7 +5,7 @@ namespace NetCore21Angular.Database
 {
     public class NetCore21AngularDbContext : IdentityDbContext
     {
-        public DbSet<Models.PeriodicElement> PeriodicElement { get; set; }
+        public DbSet<Models.PeriodicElement> PeriodicElements { get; set; }
 
         public DbSet<Models.Isotope> Isotopes { get; set; }
 

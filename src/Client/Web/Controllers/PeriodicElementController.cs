@@ -17,7 +17,7 @@ namespace NetCore21Angular.Client.Web.Controllers
             return periodicElementManager.List().DeepCopyTo<Models.PeriodicElement[]>();
         }
 
-        public Models.PeriodicElement CreatePeriodicElement(int position)
+        public Models.PeriodicElement GetPeriodicElement(int position)
         {
             return periodicElementManager.GetPeriodicElementByPosition(position).DeepCopyTo<Models.PeriodicElement>();
         }
