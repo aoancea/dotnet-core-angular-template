@@ -5,5 +5,7 @@
         PeriodicElement[] List();
 
         PeriodicElement GetPeriodicElementByPosition(int position);
+
+        void CreatePeriodicElement(PeriodicElement periodicElement);
     }
 }

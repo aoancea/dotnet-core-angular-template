@@ -13,5 +13,7 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry.Contract
         public decimal Weight { get; set; }
 
         public string Symbol { get; set; }
+
+        public Isotope[] Isotopes { get; set; }
     }
 }

@@ -20,5 +20,10 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
         {
             return periodicElementResource.DetailPeriodicElementByPosition(position).DeepCopyTo<Contract.PeriodicElement>();
         }
+
+        public void CreatePeriodicElement(Contract.PeriodicElement periodicElement)
+        {
+            periodicElementResource.SavePeriodicElement(periodicElement.DeepCopyTo<Resource.Configuration.Chemistry.Contract.PeriodicElement>());
+        }
     }
 }
