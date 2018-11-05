@@ -1,4 +1,4 @@
-﻿namespace NetCore21Angular.Engine.Validation.Contract
+﻿namespace NetCore21Angular.Engine.Validation.Configuration.Contract
 {
     public interface IPeriodicElementValidationEngine
     {

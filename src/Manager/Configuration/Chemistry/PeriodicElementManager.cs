@@ -6,11 +6,11 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
     public class PeriodicElementManager : Contract.IPeriodicElementManager
     {
         private readonly Resource.Configuration.Chemistry.Contract.IPeriodicElementResource periodicElementResource;
-        private readonly Engine.Validation.Contract.IPeriodicElementValidationEngine periodicElementValidationEngine;
+        private readonly Engine.Validation.Configuration.Contract.IPeriodicElementValidationEngine periodicElementValidationEngine;
 
         public PeriodicElementManager(
             Resource.Configuration.Chemistry.Contract.IPeriodicElementResource periodicElementResource,
-            Engine.Validation.Contract.IPeriodicElementValidationEngine periodicElementValidationEngine)
+            Engine.Validation.Configuration.Contract.IPeriodicElementValidationEngine periodicElementValidationEngine)
         {
             this.periodicElementResource = periodicElementResource;
             this.periodicElementValidationEngine = periodicElementValidationEngine;
@@ -28,7 +28,7 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
 
         public Infrastructure.ValidationError[] CreatePeriodicElement(Contract.PeriodicElement periodicElement)
         {
-            Infrastructure.ValidationError[] validationErrors = periodicElementValidationEngine.ValidatePeriodicElement(periodicElement.DeepCopyTo<Engine.Validation.Contract.PeriodicElement>());
+            Infrastructure.ValidationError[] validationErrors = periodicElementValidationEngine.ValidatePeriodicElement(periodicElement.DeepCopyTo<Engine.Validation.Configuration.Contract.PeriodicElement>());
 
             if (validationErrors.Any())
                 return validationErrors;
