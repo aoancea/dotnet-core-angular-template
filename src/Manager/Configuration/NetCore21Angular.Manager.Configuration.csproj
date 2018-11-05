@@ -9,6 +9,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Engine\Validation\NetCore21Angular.Engine.Validation.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\NetCore21Angular.Infrastructure.csproj" />
     <ProjectReference Include="..\..\Resource\Configuration\NetCore21Angular.Resource.Configuration.csproj" />
   </ItemGroup>
 

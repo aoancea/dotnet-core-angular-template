@@ -24,13 +24,13 @@ namespace NetCore21Angular.Client.Web.Controllers
         }
 
         [HttpPost]
-        public void CreatePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
+        public Infrastructure.ValidationError[] CreatePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
         {
             Manager.Configuration.Chemistry.Contract.PeriodicElement managerPeriodicElement = periodicElement.DeepCopyTo<Manager.Configuration.Chemistry.Contract.PeriodicElement>();
             managerPeriodicElement.ID = Guid.NewGuid();
             managerPeriodicElement.Isotopes = new Manager.Configuration.Chemistry.Contract.Isotope[0];
 
-            periodicElementManager.CreatePeriodicElement(managerPeriodicElement);
+            return periodicElementManager.CreatePeriodicElement(managerPeriodicElement);
         }
     }
 }

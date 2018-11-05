@@ -1,14 +1,19 @@
 ﻿using Runtime.Mapper;
+using System.Linq;
 
 namespace NetCore21Angular.Manager.Configuration.Chemistry
 {
     public class PeriodicElementManager : Contract.IPeriodicElementManager
     {
         private readonly Resource.Configuration.Chemistry.Contract.IPeriodicElementResource periodicElementResource;
+        private readonly Engine.Validation.Contract.IPeriodicElementValidationEngine periodicElementValidationEngine;
 
-        public PeriodicElementManager(Resource.Configuration.Chemistry.Contract.IPeriodicElementResource periodicElementResource)
+        public PeriodicElementManager(
+            Resource.Configuration.Chemistry.Contract.IPeriodicElementResource periodicElementResource,
+            Engine.Validation.Contract.IPeriodicElementValidationEngine periodicElementValidationEngine)
         {
             this.periodicElementResource = periodicElementResource;
+            this.periodicElementValidationEngine = periodicElementValidationEngine;
         }
 
         public Contract.PeriodicElement[] List()
@@ -21,9 +26,16 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
             return periodicElementResource.DetailPeriodicElementByPosition(position).DeepCopyTo<Contract.PeriodicElement>();
         }
 
-        public void CreatePeriodicElement(Contract.PeriodicElement periodicElement)
+        public Infrastructure.ValidationError[] CreatePeriodicElement(Contract.PeriodicElement periodicElement)
         {
+            Infrastructure.ValidationError[] validationErrors = periodicElementValidationEngine.ValidatePeriodicElement(periodicElement.DeepCopyTo<Engine.Validation.Contract.PeriodicElement>());
+
+            if (validationErrors.Any())
+                return validationErrors;
+
             periodicElementResource.SavePeriodicElement(periodicElement.DeepCopyTo<Resource.Configuration.Chemistry.Contract.PeriodicElement>());
+
+            return new Infrastructure.ValidationError[0];
         }
     }
 }

@@ -6,6 +6,6 @@
 
         PeriodicElement GetPeriodicElementByPosition(int position);
 
-        void CreatePeriodicElement(PeriodicElement periodicElement);
+        Infrastructure.ValidationError[] CreatePeriodicElement(PeriodicElement periodicElement);
     }
 }

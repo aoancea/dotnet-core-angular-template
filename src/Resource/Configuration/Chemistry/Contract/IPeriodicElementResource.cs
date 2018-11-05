@@ -5,7 +5,10 @@
     {
         PeriodicElement[] List();
 
+        // TODO - Switch to load by ID instead
         PeriodicElement DetailPeriodicElementByPosition(int position);
+
+        PeriodicElementHeader DetailPeriodicElementHeaderByPosition(int position);
 
         void SavePeriodicElement(PeriodicElement periodicElement);
     }

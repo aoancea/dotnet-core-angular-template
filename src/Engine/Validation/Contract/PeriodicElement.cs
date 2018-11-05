@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace NetCore21Angular.Resource.Configuration.Chemistry.Contract
+namespace NetCore21Angular.Engine.Validation.Contract
 {
-    public class PeriodicElementHeader
+    public class PeriodicElement
     {
         public Guid ID { get; set; }
 
@@ -13,10 +13,5 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry.Contract
         public decimal Weight { get; set; }
 
         public string Symbol { get; set; }
-    }
-
-    public class PeriodicElement : PeriodicElementHeader
-    {
-        public Isotope[] Isotopes { get; set; }
     }
 }

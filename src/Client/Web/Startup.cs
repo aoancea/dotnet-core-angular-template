@@ -87,6 +87,7 @@ namespace NetCore21Angular.Client.Web
             services.AddTransient<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager, Manager.Configuration.Chemistry.PeriodicElementManager>();
 
             // Engine
+            services.AddTransient<Engine.Validation.Contract.IPeriodicElementValidationEngine, Engine.Validation.PeriodicElementValidationEngine>();
 
             // Resource
             services.AddTransient<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>();

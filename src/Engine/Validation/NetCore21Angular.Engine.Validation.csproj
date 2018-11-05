@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\NetCore21Angular.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Resource\Configuration\NetCore21Angular.Resource.Configuration.csproj" />
+  </ItemGroup>
+
 </Project>
