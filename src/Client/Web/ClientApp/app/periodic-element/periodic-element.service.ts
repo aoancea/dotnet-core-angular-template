@@ -19,6 +19,6 @@ export class PeriodicElementService {
     }
 
     createPeriodicElement(periodicElement: PeriodicElement) {
-        this.http.post<PeriodicElement[]>(`${this.baseUrl}PeriodicElement/CreatePeriodicElement`, periodicElement);
+        return this.http.post<any>(`${this.baseUrl}PeriodicElement/CreatePeriodicElement`, periodicElement);
     }
 }

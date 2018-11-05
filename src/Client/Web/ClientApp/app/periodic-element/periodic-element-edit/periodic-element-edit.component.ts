@@ -27,7 +27,7 @@ export class PeriodicElementEditComponent implements OnInit {
 
         this.position = this.route.snapshot.params['position'];
 
-        if (this.position) {
+        if (this.position && this.position != 0) {
             this.periodicElementService.getPeriodicElement(this.position).subscribe(res => {
                 this.name = res.name;
                 this.symbol = res.symbol;
@@ -39,5 +39,9 @@ export class PeriodicElementEditComponent implements OnInit {
         } else {
             this.isEdit = false;
         }
+    }
+
+    save() {
+        this.periodicElementService.createPeriodicElement(<PeriodicElement>{ name: this.name, position: this.position, symbol: this.symbol, weight: this.weight }).subscribe(() => { });
     }
 }

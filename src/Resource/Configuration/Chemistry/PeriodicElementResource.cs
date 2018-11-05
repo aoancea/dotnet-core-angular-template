@@ -50,7 +50,7 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
 
             if (dbPeriodicElement == null)
             {
-                netCore21AngularDbContext.PeriodicElements.Add(dbPeriodicElement = new Database.Models.PeriodicElement());
+                netCore21AngularDbContext.PeriodicElements.Add(dbPeriodicElement = new Database.Models.PeriodicElement() { ID = periodicElement.ID });
             }
 
             Mapper.Map(periodicElement, dbPeriodicElement);
@@ -61,7 +61,7 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
 
                 if (dbIsotope == null)
                 {
-                    netCore21AngularDbContext.Isotopes.Add(dbIsotope = new Database.Models.Isotope());
+                    netCore21AngularDbContext.Isotopes.Add(dbIsotope = new Database.Models.Isotope() { ID = isotope.ID });
                 }
 
                 Mapper.Map(isotope, dbIsotope);

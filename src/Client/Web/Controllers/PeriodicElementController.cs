@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Runtime.Mapper;
+using System;
 
 namespace NetCore21Angular.Client.Web.Controllers
 {
@@ -22,9 +23,14 @@ namespace NetCore21Angular.Client.Web.Controllers
             return periodicElementManager.GetPeriodicElementByPosition(position).DeepCopyTo<Models.PeriodicElement>();
         }
 
-        public void CreatePeriodicElement(Models.PeriodicElement periodicElement)
+        [HttpPost]
+        public void CreatePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
         {
-            periodicElementManager.CreatePeriodicElement(periodicElement.DeepCopyTo<Manager.Configuration.Chemistry.Contract.PeriodicElement>());
+            Manager.Configuration.Chemistry.Contract.PeriodicElement managerPeriodicElement = periodicElement.DeepCopyTo<Manager.Configuration.Chemistry.Contract.PeriodicElement>();
+            managerPeriodicElement.ID = Guid.NewGuid();
+            managerPeriodicElement.Isotopes = new Manager.Configuration.Chemistry.Contract.Isotope[0];
+
+            periodicElementManager.CreatePeriodicElement(managerPeriodicElement);
         }
     }
 }
