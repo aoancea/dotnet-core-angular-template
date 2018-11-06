@@ -15,8 +15,8 @@ export class PeriodicElementService {
         return this.http.get<PeriodicElement[]>(`${this.baseUrl}PeriodicElement/ListPeriodicElements`);
     }
 
-    getPeriodicElement(position: number) {
-        return this.http.get<PeriodicElement>(`${this.baseUrl}PeriodicElement/GetPeriodicElement?position=${position}`);
+    detailPeriodicElementByPosition(position: number) {
+        return this.http.get<PeriodicElement>(`${this.baseUrl}PeriodicElement/DetailPeriodicElementByPosition?position=${position}`);
     }
 
     detailPeriodicElementByID(periodicElementID: string) {

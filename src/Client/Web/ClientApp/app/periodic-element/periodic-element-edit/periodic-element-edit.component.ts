@@ -118,7 +118,7 @@ export class PeriodicElementEditComponent implements OnInit {
     }
 
     validatePositionTaken(control: AbstractControl) {
-        return this.periodicElementService.getPeriodicElement(control.value).pipe(
+        return this.periodicElementService.detailPeriodicElementByPosition(control.value).pipe(
             map(periodicElement => periodicElement ? null : { positionTaken: true })
         );
     }
