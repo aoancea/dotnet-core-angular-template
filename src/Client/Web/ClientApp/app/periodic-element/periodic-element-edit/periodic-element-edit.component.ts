@@ -122,4 +122,5 @@ export class PeriodicElementEditComponent implements OnInit {
             map(periodicElement => periodicElement ? null : { positionTaken: true })
         );
     }
+
 }
