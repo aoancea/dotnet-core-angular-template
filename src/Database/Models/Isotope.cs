@@ -6,6 +6,8 @@ namespace NetCore21Angular.Database.Models
     {
         public Guid ID { get; set; }
 
+        public Guid PeriodicElementID { get; set; }
+
         public string NuclideSymbol { get; set; }
 
         public int Z { get; set; }
