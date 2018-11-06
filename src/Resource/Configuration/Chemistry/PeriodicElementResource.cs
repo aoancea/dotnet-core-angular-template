@@ -14,11 +14,6 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
             this.netCore21AngularDbContext = netCore21AngularDbContext;
         }
 
-        public Contract.PeriodicElement DetailPeriodicElementByPosition(int position)
-        {
-            return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElement>();
-        }
-
         public Contract.PeriodicElementHeader DetailPeriodicElementHeaderByPosition(int position)
         {
             return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElementHeader>();
@@ -60,7 +55,7 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
 
         public void SavePeriodicElement(Contract.PeriodicElement periodicElement)
         {
-            Database.Models.PeriodicElement dbPeriodicElement = netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == periodicElement.Position);
+            Database.Models.PeriodicElement dbPeriodicElement = netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElement.ID);
 
             if (dbPeriodicElement == null)
             {
