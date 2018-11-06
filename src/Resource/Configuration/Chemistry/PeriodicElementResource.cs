@@ -41,14 +41,13 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
                 };
             }
 
-            return netCore21AngularDbContext.PeriodicElements.ToArray().DeepCopyTo<Contract.PeriodicElement[]>();
+            return dbPeriodicElements.DeepCopyTo<Contract.PeriodicElement[]>();
         }
 
         public Contract.PeriodicElement DetailPeriodicElementByID(Guid periodicElementID)
         {
             Contract.PeriodicElement resourcePeriodicElement = netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElementID).DeepCopyTo<Contract.PeriodicElement>();
-
-            // TODO - Attach Isotopes
+            resourcePeriodicElement.Isotopes = netCore21AngularDbContext.Isotopes.Where(x => x.PeriodicElementID == periodicElementID).ToArray().DeepCopyTo<Contract.Isotope[]>();
 
             return resourcePeriodicElement;
         }
