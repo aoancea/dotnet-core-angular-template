@@ -46,7 +46,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="ClientApp\app\core\core.models.ts" />
     <None Remove="ClientApp\app\core\core.module.ts" />
+    <None Remove="ClientApp\app\core\guards\authentication.guard.ts" />
     <None Remove="ClientApp\app\core\services\http-request-interceptor.ts" />
     <None Remove="ClientApp\app\periodic-element\periodic-element.models.ts" />
     <None Remove="ClientApp\app\shared\angular-material.module.ts" />
@@ -60,7 +62,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\core\core.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\core\core.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\core\guards\authentication.guard.ts" />
     <TypeScriptCompile Include="ClientApp\app\core\services\http-request-interceptor.ts" />
     <TypeScriptCompile Include="ClientApp\app\periodic-element\periodic-element.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\angular-material.module.ts" />

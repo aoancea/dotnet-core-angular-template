@@ -18,6 +18,8 @@ import { PeriodicElementEditComponent } from './periodic-element/periodic-elemen
 import { AngularMaterialModule } from './shared/angular-material.module';
 import { CoreModule } from './core/core.module';
 
+import { AuthenticationGuard } from './core/guards/authentication.guard';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -38,9 +40,9 @@ import { CoreModule } from './core/core.module';
             { path: '', component: HomeComponent, pathMatch: 'full' },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'periodic-elements', component: PeriodicElementListComponent },
-            { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent },
-            { path: 'periodic-element-edit', component: PeriodicElementEditComponent },
+            { path: 'periodic-elements', component: PeriodicElementListComponent, canActivate: [AuthenticationGuard] },
+            { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
+            { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
         ]),
         AngularMaterialModule,
         CoreModule

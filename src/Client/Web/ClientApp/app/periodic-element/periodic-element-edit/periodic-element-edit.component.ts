@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import { PeriodicElement, Isotope } from './../periodic-element.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PeriodicElementService } from '../periodic-element.service';
+import { ValidationError } from '../../core/core.models';
 
 @Component({
     selector: 'app-periodic-element-edit',
@@ -13,11 +14,15 @@ import { PeriodicElementService } from '../periodic-element.service';
 })
 export class PeriodicElementEditComponent implements OnInit {
 
+    private periodicElementID: string;
+
     public periodicElement: PeriodicElement;
 
     private isEdit: boolean = false;
 
     private formGroup: FormGroup;
+
+    private errorMessage: string;
 
     constructor(
         private router: Router,
@@ -26,10 +31,10 @@ export class PeriodicElementEditComponent implements OnInit {
 
     ngOnInit() {
 
-        let periodicElementID = this.route.snapshot.params['id'];
+        this.periodicElementID = this.route.snapshot.params['id'];
 
-        if (periodicElementID) {
-            this.periodicElementService.detailPeriodicElementByID(periodicElementID).subscribe(res => {
+        if (this.periodicElementID) {
+            this.periodicElementService.detailPeriodicElementByID(this.periodicElementID).subscribe(res => {
                 this.periodicElement = res;
                 this.initForm(this.periodicElement);
                 this.isEdit = true;
@@ -41,6 +46,8 @@ export class PeriodicElementEditComponent implements OnInit {
     }
 
     save() {
+        this.clearErrorMessages();
+
         Object.keys(this.formGroup.controls).forEach(control => {
             this.formGroup.get(control).markAsTouched();
         });
@@ -48,10 +55,35 @@ export class PeriodicElementEditComponent implements OnInit {
         if (this.formGroup.valid) {
             this.periodicElement = this.formGroup.value as PeriodicElement;
 
-            this.periodicElementService.createPeriodicElement(this.periodicElement).subscribe(() => {
-                this.router.navigate(['/periodic-elements']);
-            });
+            if (this.isEdit) {
+                this.periodicElement.id = this.periodicElementID;
+
+                this.periodicElementService.updatePeriodicElement(this.periodicElement).subscribe((validationErrors: ValidationError[]) => {
+                    if (validationErrors.length != 0) {
+                        this.displayErrorMessages(validationErrors)
+                    } else {
+                        this.router.navigate(['/periodic-elements']);
+                    }
+                });
+            }
+            else {
+                this.periodicElementService.createPeriodicElement(this.periodicElement).subscribe((validationErrors: ValidationError[]) => {
+                    if (validationErrors.length != 0) {
+                        this.displayErrorMessages(validationErrors)
+                    } else {
+                        this.router.navigate(['/periodic-elements']);
+                    }
+                });
+            }
         }
+    }
+
+    displayErrorMessages(validationErrors: ValidationError[]) {
+        this.errorMessage = validationErrors.map(x => x.message).join(' | ');
+    }
+
+    clearErrorMessages() {
+        this.errorMessage = null;
     }
 
     initForm(periodicElement: PeriodicElement) {

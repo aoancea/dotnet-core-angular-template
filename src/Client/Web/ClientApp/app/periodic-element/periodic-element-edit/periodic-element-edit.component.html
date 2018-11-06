@@ -25,4 +25,8 @@
     <div class="example-button-row">
         <button mat-raised-button color="primary" (click)="save()">Save</button>
     </div>
+
+    <mat-error *ngIf="errorMessage">
+        {{errorMessage}}
+    </mat-error>
 </form>
