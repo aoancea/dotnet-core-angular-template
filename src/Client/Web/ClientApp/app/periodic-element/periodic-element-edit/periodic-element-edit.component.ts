@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
+import { map } from 'rxjs/operators';
 
-import { PeriodicElement } from './../periodic-element.models';
+import { PeriodicElement, Isotope } from './../periodic-element.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PeriodicElementService } from '../periodic-element.service';
 
@@ -11,37 +13,83 @@ import { PeriodicElementService } from '../periodic-element.service';
 })
 export class PeriodicElementEditComponent implements OnInit {
 
-    public position: number;
-    public name: string;
-    public weight: number;
-    public symbol: string;
+    public periodicElement: PeriodicElement;
 
     private isEdit: boolean = false;
+
+    private formGroup: FormGroup;
 
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private periodicElementService: PeriodicElementService) { }
+        private periodicElementService: PeriodicElementService)
+    { }
 
     ngOnInit() {
 
-        this.position = this.route.snapshot.params['position'];
+        let position = this.route.snapshot.params['position'];
 
-        if (this.position && this.position != 0) {
-            this.periodicElementService.getPeriodicElement(this.position).subscribe(res => {
-                this.name = res.name;
-                this.symbol = res.symbol;
-                this.weight = res.weight;
-
+        if (position && position != 0) {
+            this.periodicElementService.getPeriodicElement(position).subscribe(res => {
+                this.periodicElement = res;
+                this.initForm(this.periodicElement);
                 this.isEdit = true;
             });
-
         } else {
             this.isEdit = false;
+            this.initForm(<PeriodicElement>{});
         }
     }
 
     save() {
-        this.periodicElementService.createPeriodicElement(<PeriodicElement>{ name: this.name, position: this.position, symbol: this.symbol, weight: this.weight }).subscribe(() => { });
+        Object.keys(this.formGroup.controls).forEach(control => {
+            this.formGroup.get(control).markAsTouched();
+        });
+
+        if (this.formGroup.valid) {
+            this.periodicElement = this.formGroup.value as PeriodicElement;
+
+            this.periodicElementService.createPeriodicElement(this.periodicElement).subscribe(() => {
+
+            });
+        }
+    }
+
+    initForm(periodicElement: PeriodicElement) {
+        this.formGroup = new FormGroup({
+            position: new FormControl(periodicElement.position),
+            //position: new FormControl(periodicElement.position, [Validators.required], [this.validatePositionTaken.bind(this)]),
+            name: new FormControl(periodicElement.name),
+            weight: new FormControl(periodicElement.weight),
+            symbol: new FormControl(periodicElement.symbol),
+            isotopes: this.createIsotopesArray(periodicElement.isotopes)
+        });
+    }
+
+    createIsotopesArray(isotopes: Isotope[]) {
+        let formArray = new FormArray([]);
+
+        if (!isotopes)
+            return formArray;
+
+        isotopes.forEach(isotope => {
+            formArray.push(new FormGroup({
+                name: new FormControl(isotope.name)
+            }));
+        });
+
+        return formArray;
+    }
+
+    addIsotope() {
+        (this.formGroup.get('items') as FormArray).push(new FormGroup({
+            name: new FormControl('')
+        }));
+    }
+
+    validatePositionTaken(control: AbstractControl) {
+        return this.periodicElementService.getPeriodicElement(control.value).pipe(
+            map(periodicElement => periodicElement ? null : { positionTaken: true })
+        );
     }
 }
