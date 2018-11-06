@@ -22,8 +22,7 @@ export class PeriodicElementEditComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private periodicElementService: PeriodicElementService)
-    { }
+        private periodicElementService: PeriodicElementService) { }
 
     ngOnInit() {
 
@@ -57,8 +56,7 @@ export class PeriodicElementEditComponent implements OnInit {
 
     initForm(periodicElement: PeriodicElement) {
         this.formGroup = new FormGroup({
-            position: new FormControl(periodicElement.position),
-            //position: new FormControl(periodicElement.position, [Validators.required], [this.validatePositionTaken.bind(this)]),
+            position: new FormControl(periodicElement.position, [Validators.required, Validators.max(118)]), // [this.validatePositionTaken.bind(this)]
             name: new FormControl(periodicElement.name),
             weight: new FormControl(periodicElement.weight),
             symbol: new FormControl(periodicElement.symbol),
