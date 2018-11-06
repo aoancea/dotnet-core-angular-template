@@ -4,9 +4,9 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry.Contract
 {
     public interface IPeriodicElementManager
     {
-        PeriodicElement[] List();
-
         PeriodicElement DetailPeriodicElementByPosition(int position);
+
+        PeriodicElement[] List();
 
         PeriodicElement DetailPeriodicElementByID(Guid periodicElementID);
 

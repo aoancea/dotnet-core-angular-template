@@ -14,6 +14,16 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
             this.netCore21AngularDbContext = netCore21AngularDbContext;
         }
 
+        public Contract.PeriodicElement DetailPeriodicElementByPosition(int position)
+        {
+            return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElement>();
+        }
+
+        public Contract.PeriodicElementHeader DetailPeriodicElementHeaderByPosition(int position)
+        {
+            return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElementHeader>();
+        }
+
         public Contract.PeriodicElement[] List()
         {
             Database.Models.PeriodicElement[] dbPeriodicElements = netCore21AngularDbContext.PeriodicElements.ToArray();
@@ -37,16 +47,6 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
             }
 
             return netCore21AngularDbContext.PeriodicElements.ToArray().DeepCopyTo<Contract.PeriodicElement[]>();
-        }
-
-        public Contract.PeriodicElement DetailPeriodicElementByPosition(int position)
-        {
-            return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElement>();
-        }
-
-        public Contract.PeriodicElementHeader DetailPeriodicElementHeaderByPosition(int position)
-        {
-            return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElementHeader>();
         }
 
         public Contract.PeriodicElement DetailPeriodicElementByID(Guid periodicElementID)

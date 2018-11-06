@@ -17,14 +17,14 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
             this.periodicElementValidationEngine = periodicElementValidationEngine;
         }
 
-        public Contract.PeriodicElement[] List()
-        {
-            return periodicElementResource.List().DeepCopyTo<Contract.PeriodicElement[]>();
-        }
-
         public Contract.PeriodicElement DetailPeriodicElementByPosition(int position)
         {
             return periodicElementResource.DetailPeriodicElementByPosition(position).DeepCopyTo<Contract.PeriodicElement>();
+        }
+
+        public Contract.PeriodicElement[] List()
+        {
+            return periodicElementResource.List().DeepCopyTo<Contract.PeriodicElement[]>();
         }
 
         public Contract.PeriodicElement DetailPeriodicElementByID(Guid periodicElementID)

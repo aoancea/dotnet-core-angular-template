@@ -13,16 +13,19 @@ namespace NetCore21Angular.Client.Web.Controllers
             this.periodicElementManager = periodicElementManager;
         }
 
-        public Models.PeriodicElement[] ListPeriodicElements()
-        {
-            return periodicElementManager.List().DeepCopyTo<Models.PeriodicElement[]>();
-        }
-
+        [HttpGet]
         public Models.PeriodicElementHeader DetailPeriodicElementHeaderByPosition(int position)
         {
             return periodicElementManager.DetailPeriodicElementByPosition(position).DeepCopyTo<Models.PeriodicElementHeader>();
         }
 
+        [HttpGet]
+        public Models.PeriodicElement[] ListPeriodicElements()
+        {
+            return periodicElementManager.List().DeepCopyTo<Models.PeriodicElement[]>();
+        }
+
+        [HttpGet]
         public Models.PeriodicElement GetPeriodicElementByID(Guid periodicElementID)
         {
             return periodicElementManager.DetailPeriodicElementByID(periodicElementID).DeepCopyTo<Models.PeriodicElement>();

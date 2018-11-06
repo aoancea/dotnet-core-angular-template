@@ -11,12 +11,12 @@ export class PeriodicElementService {
 
     constructor(private http: HttpClient, @Inject('BASE_URL') private baseUrl: string) { }
 
-    listPeriodicElements() {
-        return this.http.get<PeriodicElement[]>(`${this.baseUrl}PeriodicElement/ListPeriodicElements`);
-    }
-
     detailPeriodicElementHeaderByPosition(position: number) {
         return this.http.get<PeriodicElementHeader>(`${this.baseUrl}PeriodicElement/DetailPeriodicElementHeaderByPosition?position=${position}`);
+    }
+
+    listPeriodicElements() {
+        return this.http.get<PeriodicElement[]>(`${this.baseUrl}PeriodicElement/ListPeriodicElements`);
     }
 
     detailPeriodicElementByID(periodicElementID: string) {
