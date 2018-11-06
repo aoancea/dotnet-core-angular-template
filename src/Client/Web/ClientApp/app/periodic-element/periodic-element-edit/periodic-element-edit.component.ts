@@ -26,10 +26,10 @@ export class PeriodicElementEditComponent implements OnInit {
 
     ngOnInit() {
 
-        let position = this.route.snapshot.params['position'];
+        let periodicElementID = this.route.snapshot.params['id'];
 
-        if (position && position != 0) {
-            this.periodicElementService.getPeriodicElement(position).subscribe(res => {
+        if (periodicElementID) {
+            this.periodicElementService.detailPeriodicElementByID(periodicElementID).subscribe(res => {
                 this.periodicElement = res;
                 this.initForm(this.periodicElement);
                 this.isEdit = true;
@@ -49,7 +49,7 @@ export class PeriodicElementEditComponent implements OnInit {
             this.periodicElement = this.formGroup.value as PeriodicElement;
 
             this.periodicElementService.createPeriodicElement(this.periodicElement).subscribe(() => {
-
+                this.router.navigate(['/periodic-elements']);
             });
         }
     }
