@@ -1,29 +1,27 @@
 <p>
     Add/Edit periodic element
 </p>
-
 <form *ngIf="formGroup" [formGroup]="formGroup">
     <div class="example-container">
         <mat-form-field>
-            <input matInput placeholder="Position" formControlName="position">
-            <!-- <mat-error *ngIf="formGroup.get('formGroup').touched && formGroup.get('formGroup').errors.uniquePosition" class="error">
-                {{ formGroup.get('formGroup').errors.uniquePosition.message}}
-            </mat-error> -->
+            <input matInput placeholder="Position" formControlName="position" type="number">
+            <mat-error *ngIf="formGroup.get('position').touched && formGroup.get('position').errors && formGroup.get('position').errors.required">
+                Position required!
+            </mat-error>
+            <mat-error *ngIf="formGroup.get('position').touched && formGroup.get('position').errors && formGroup.get('position').errors.max">
+                Position can't be bigger than {{formGroup.get('position').errors.max.max}}. Actual value {{formGroup.get('position').errors.max.actual}}
+            </mat-error>
         </mat-form-field>
-
         <mat-form-field>
             <input matInput placeholder="Name" formControlName="name">
         </mat-form-field>
-
         <mat-form-field>
-            <input matInput placeholder="Weight" formControlName="weight">
+            <input matInput placeholder="Weight" formControlName="weight" type="number">
         </mat-form-field>
-
         <mat-form-field>
             <input matInput placeholder="Symbol" formControlName="symbol">
         </mat-form-field>
     </div>
-
     <div class="example-button-row">
         <button mat-raised-button color="primary" (click)="save()">Save</button>
     </div>

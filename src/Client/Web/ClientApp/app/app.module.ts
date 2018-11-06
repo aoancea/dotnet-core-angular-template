@@ -39,7 +39,8 @@ import { CoreModule } from './core/core.module';
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
             { path: 'periodic-elements', component: PeriodicElementListComponent },
-            { path: 'periodic-element-edit/:position', component: PeriodicElementEditComponent },
+            { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent },
+            { path: 'periodic-element-edit', component: PeriodicElementEditComponent },
         ]),
         AngularMaterialModule,
         CoreModule

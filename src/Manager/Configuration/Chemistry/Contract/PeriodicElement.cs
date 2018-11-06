@@ -2,7 +2,7 @@
 
 namespace NetCore21Angular.Manager.Configuration.Chemistry.Contract
 {
-    public class PeriodicElement
+    public class PeriodicElementHeader
     {
         public Guid ID { get; set; }
 
@@ -13,7 +13,10 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry.Contract
         public decimal Weight { get; set; }
 
         public string Symbol { get; set; }
+    }
 
+    public class PeriodicElement : PeriodicElementHeader
+    {
         public Isotope[] Isotopes { get; set; }
     }
 }

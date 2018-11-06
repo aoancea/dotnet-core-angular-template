@@ -18,6 +18,10 @@ export class PeriodicElementService {
         return this.http.get<PeriodicElement>(`${this.baseUrl}PeriodicElement/GetPeriodicElement?position=${position}`);
     }
 
+    detailPeriodicElementByID(periodicElementID: string) {
+        return this.http.get<PeriodicElement>(`${this.baseUrl}PeriodicElement/GetPeriodicElementByID?periodicElementID=${periodicElementID}`);
+    }
+
     createPeriodicElement(periodicElement: PeriodicElement) {
         return this.http.post<any>(`${this.baseUrl}PeriodicElement/CreatePeriodicElement`, periodicElement);
     }

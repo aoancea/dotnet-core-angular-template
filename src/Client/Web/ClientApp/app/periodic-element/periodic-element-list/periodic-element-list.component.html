@@ -3,7 +3,7 @@
 <p>Many period elements in the list</p>
 
 <div class="example-button-row">
-    <button mat-raised-button [routerLink]='["/periodic-element-edit/0"]' color="primary">Add</button>
+    <button mat-raised-button [routerLink]='["/periodic-element-edit"]' color="primary">Add</button>
 </div>
 
 <table mat-table [dataSource]="periodicElements" class="mat-elevation-z8">
@@ -37,7 +37,7 @@
     <!-- Symbol Column -->
     <ng-container matColumnDef="action">
         <th mat-header-cell *matHeaderCellDef> Action </th>
-        <td mat-cell *matCellDef="let element" [routerLink]="['../periodic-element-edit', element.position]"> Edit </td>
+        <td mat-cell *matCellDef="let element" [routerLink]="['../periodic-element-edit', element.id]"> Edit </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
