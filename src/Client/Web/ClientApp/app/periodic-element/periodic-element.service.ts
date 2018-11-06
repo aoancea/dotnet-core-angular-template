@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 
-import { PeriodicElement } from './periodic-element.models';
+import { PeriodicElement, PeriodicElementHeader } from './periodic-element.models';
 import { ValidationError } from '../core/core.models';
 
 @Injectable({
@@ -15,8 +15,8 @@ export class PeriodicElementService {
         return this.http.get<PeriodicElement[]>(`${this.baseUrl}PeriodicElement/ListPeriodicElements`);
     }
 
-    detailPeriodicElementByPosition(position: number) {
-        return this.http.get<PeriodicElement>(`${this.baseUrl}PeriodicElement/DetailPeriodicElementByPosition?position=${position}`);
+    detailPeriodicElementHeaderByPosition(position: number) {
+        return this.http.get<PeriodicElementHeader>(`${this.baseUrl}PeriodicElement/DetailPeriodicElementHeaderByPosition?position=${position}`);
     }
 
     detailPeriodicElementByID(periodicElementID: string) {

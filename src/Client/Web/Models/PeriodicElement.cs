@@ -2,7 +2,7 @@
 
 namespace NetCore21Angular.Client.Web.Models
 {
-    public class PeriodicElement
+    public class PeriodicElementHeader
     {
         public Guid ID { get; set; }
 
@@ -13,5 +13,10 @@ namespace NetCore21Angular.Client.Web.Models
         public decimal Weight { get; set; }
 
         public string Symbol { get; set; }
+    }
+
+    public class PeriodicElement : PeriodicElementHeader
+    {
+        public Isotope[] Isotopes { get; set; }
     }
 }
