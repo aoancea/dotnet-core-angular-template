@@ -17,6 +17,9 @@
         </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Weight" formControlName="weight" type="number">
+            <mat-error *ngIf="formGroup.get('weight').touched && formGroup.get('weight').errors && formGroup.get('weight').errors.required">
+                Weight required!
+            </mat-error>
         </mat-form-field>
         <mat-form-field>
             <input matInput placeholder="Symbol" formControlName="symbol">

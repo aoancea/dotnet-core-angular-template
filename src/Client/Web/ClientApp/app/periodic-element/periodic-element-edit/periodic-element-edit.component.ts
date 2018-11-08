@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, AbstractControl, FormArray } from '@angular/forms';
+import { FormGroup, FormControl, Validators, AbstractControl, FormArray, FormBuilder } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
 import { PeriodicElement, Isotope } from './../periodic-element.models';
@@ -27,7 +27,8 @@ export class PeriodicElementEditComponent implements OnInit {
     constructor(
         private router: Router,
         private route: ActivatedRoute,
-        private periodicElementService: PeriodicElementService) { }
+        private periodicElementService: PeriodicElementService,
+        private formBuilder: FormBuilder) { }
 
     ngOnInit() {
 
@@ -87,34 +88,23 @@ export class PeriodicElementEditComponent implements OnInit {
     }
 
     initForm(periodicElement: PeriodicElement) {
-        this.formGroup = new FormGroup({
-            position: new FormControl(periodicElement.position, [Validators.required, Validators.max(118)]), // [this.validatePositionTaken.bind(this)]
-            name: new FormControl(periodicElement.name),
-            weight: new FormControl(periodicElement.weight),
-            symbol: new FormControl(periodicElement.symbol),
-            isotopes: this.createIsotopesArray(periodicElement.isotopes)
+        this.formGroup = this.formBuilder.group({
+            position: [periodicElement.position, [Validators.required, Validators.max(118)] /*, [this.validatePositionTaken.bind(this)]*/],
+            name: periodicElement.name,
+            weight: [periodicElement.weight, Validators.required],
+            symbol: periodicElement.symbol,
+            isotopes: this.formBuilder.array((periodicElement.isotopes || []).map(isotope => this.createIsotopeFormGroup(isotope)))
         });
     }
 
-    createIsotopesArray(isotopes: Isotope[]) {
-        let formArray = new FormArray([]);
-
-        if (!isotopes)
-            return formArray;
-
-        isotopes.forEach(isotope => {
-            formArray.push(new FormGroup({
-                name: new FormControl(isotope.name)
-            }));
+    createIsotopeFormGroup(isotope: Isotope) {
+        return this.formBuilder.group({
+            name: isotope.name
         });
-
-        return formArray;
     }
 
     addIsotope() {
-        (this.formGroup.get('items') as FormArray).push(new FormGroup({
-            name: new FormControl('')
-        }));
+        (this.formGroup.get('items') as FormArray).push(this.createIsotopeFormGroup(<Isotope>{}));
     }
 
     validatePositionTaken(control: AbstractControl) {
