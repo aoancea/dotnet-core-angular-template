@@ -104,7 +104,7 @@ export class PeriodicElementEditComponent implements OnInit {
     }
 
     addIsotope() {
-        (this.formGroup.get('items') as FormArray).push(this.createIsotopeFormGroup(<Isotope>{}));
+        (this.formGroup.get('isotopes') as FormArray).push(this.createIsotopeFormGroup(<Isotope>{}));
     }
 
     validatePositionTaken(control: AbstractControl) {
