@@ -55,5 +55,10 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
 
             return new Infrastructure.ValidationError[0];
         }
+
+        public void DeletePeriodicElement(Guid periodicElementID)
+        {
+            periodicElementResource.DeletePeriodicElement(periodicElementID);
+        }
     }
 }

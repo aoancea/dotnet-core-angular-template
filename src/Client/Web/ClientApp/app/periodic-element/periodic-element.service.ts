@@ -30,4 +30,8 @@ export class PeriodicElementService {
     updatePeriodicElement(periodicElement: PeriodicElement) {
         return this.http.post<ValidationError[]>(`${this.baseUrl}PeriodicElement/UpdatePeriodicElement`, periodicElement);
     }
+
+    deletePeriodicElement(periodicElementID: string) {
+        return this.http.delete<any>(`${this.baseUrl}PeriodicElement/DeletePeriodicElement?periodicElementID=${periodicElementID}`);
+    }
 }

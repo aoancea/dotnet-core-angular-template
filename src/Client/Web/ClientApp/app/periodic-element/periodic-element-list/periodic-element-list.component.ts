@@ -18,6 +18,16 @@ export class PeriodicElementListComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.loadPeriodicElements();
+    }
+
+    deletePeriodicElement(periodicElement: PeriodicElement) {
+        this.periodicElementService.deletePeriodicElement(periodicElement.id).subscribe(x => {
+            this.loadPeriodicElements();
+        });
+    }
+
+    loadPeriodicElements() {
         this.periodicElementService.listPeriodicElements().subscribe(res => {
             this.periodicElements = res;
         });

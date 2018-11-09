@@ -77,5 +77,17 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
 
             netCore21AngularDbContext.SaveChanges();
         }
+
+        public void DeletePeriodicElement(Guid periodicElementID)
+        {
+            Database.Models.PeriodicElement dbPeriodicElement = netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElementID);
+
+            if (dbPeriodicElement != null)
+            {
+                netCore21AngularDbContext.PeriodicElements.Remove(dbPeriodicElement);
+
+                netCore21AngularDbContext.SaveChanges();
+            }
+        }
     }
 }

@@ -12,5 +12,7 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry.Contract
         PeriodicElement DetailPeriodicElementByID(Guid periodicElementID);
 
         void SavePeriodicElement(PeriodicElement periodicElement);
+
+        void DeletePeriodicElement(Guid periodicElementID);
     }
 }

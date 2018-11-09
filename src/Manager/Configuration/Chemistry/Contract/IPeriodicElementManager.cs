@@ -13,5 +13,7 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry.Contract
         Infrastructure.ValidationError[] CreatePeriodicElement(PeriodicElement periodicElement);
 
         Infrastructure.ValidationError[] UpdatePeriodicElement(PeriodicElement periodicElement);
+
+        void DeletePeriodicElement(Guid periodicElementID);
     }
 }

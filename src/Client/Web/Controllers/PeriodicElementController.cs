@@ -49,5 +49,11 @@ namespace NetCore21Angular.Client.Web.Controllers
 
             return periodicElementManager.UpdatePeriodicElement(managerPeriodicElement);
         }
+
+        [HttpDelete]
+        public void DeletePeriodicElement(Guid periodicElementID)
+        {
+            periodicElementManager.DeletePeriodicElement(periodicElementID);
+        }
     }
 }
