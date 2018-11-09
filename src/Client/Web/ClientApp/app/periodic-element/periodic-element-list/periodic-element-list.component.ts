@@ -12,7 +12,7 @@ import { PeriodicElementService } from '../periodic-element.service';
 export class PeriodicElementListComponent implements OnInit {
 
     public displayedColumns: string[] = ['position', 'name', 'weight', 'symbol', 'action'];
-    public periodicElements: PeriodicElement[] = [];
+    public periodicElements: PeriodicElement[];
 
     constructor(private periodicElementService: PeriodicElementService) {
     }

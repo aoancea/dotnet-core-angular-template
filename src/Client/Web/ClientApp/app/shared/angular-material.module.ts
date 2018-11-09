@@ -6,7 +6,12 @@ import {
     MatTableModule,
     MatFormFieldModule,
     MatSelectModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatProgressBarModule
 } from '@angular/material';
 
 @NgModule({
@@ -16,7 +21,12 @@ import {
         MatTableModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule
     ],
     exports: [
         MatSlideToggleModule,
@@ -24,7 +34,12 @@ import {
         MatTableModule,
         MatFormFieldModule,
         MatSelectModule,
-        MatInputModule
+        MatInputModule,
+        MatButtonModule,
+        MatIconModule,
+        MatTooltipModule,
+        MatProgressSpinnerModule,
+        MatProgressBarModule
     ],
     providers: [
     ],
