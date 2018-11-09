@@ -1,4 +1,6 @@
-﻿namespace NetCore21Angular.Engine.Validation.Configuration
+﻿using System.Collections.Generic;
+
+namespace NetCore21Angular.Engine.Validation.Configuration
 {
     public class PeriodicElementValidationEngine : Contract.IPeriodicElementValidationEngine
     {
@@ -11,12 +13,23 @@
 
         public Infrastructure.ValidationError[] ValidatePeriodicElement(Contract.PeriodicElement periodicElement)
         {
-            Resource.Configuration.Chemistry.Contract.PeriodicElementHeader periodicElementHeader = periodicElementResource.DetailPeriodicElementHeaderByPosition(periodicElement.Position);
+            List<Infrastructure.ValidationError> errors = new List<Infrastructure.ValidationError>();
 
-            if (periodicElementHeader != null && periodicElementHeader.ID != periodicElement.ID)
-                return new Infrastructure.ValidationError[1] { new Infrastructure.ValidationError { Message = $"There's already a periodic element on position {periodicElement.Position}" } };
+            Resource.Configuration.Chemistry.Contract.PeriodicElementHeader resourcePeriodicElementHeader = periodicElementResource.DetailPeriodicElementHeaderByPosition(periodicElement.Position);
 
-            return new Infrastructure.ValidationError[0];
+            if (periodicElement.Position < 1)
+            {
+                errors.Add(new Infrastructure.ValidationError { Message = $"Position can't be lower than 1. Actual value {periodicElement.Position}" });
+            }
+            else if (periodicElement.Position > 118)
+            {
+                errors.Add(new Infrastructure.ValidationError { Message = $"Position can't be greater than 118. Actual value {periodicElement.Position}" });
+            }
+
+            if (resourcePeriodicElementHeader != null && resourcePeriodicElementHeader.ID != periodicElement.ID)
+                errors.Add(new Infrastructure.ValidationError { Message = $"There's already a periodic element on position {periodicElement.Position}" });
+
+            return errors.ToArray();
         }
     }
 }
