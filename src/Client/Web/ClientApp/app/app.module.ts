@@ -20,6 +20,11 @@ import { CoreModule } from './core/core.module';
 
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 
+
+import { RegistrationFormComponent } from './registration-form/registration-form.component';
+
+import { UserService } from './registration-form/registration-form.service';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -28,7 +33,8 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
         CounterComponent,
         FetchDataComponent,
         PeriodicElementListComponent,
-        PeriodicElementEditComponent
+        PeriodicElementEditComponent,
+        RegistrationFormComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -43,6 +49,8 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
             { path: 'periodic-elements', component: PeriodicElementListComponent, canActivate: [AuthenticationGuard] },
             { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
             { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
+
+            { path: 'register', component: RegistrationFormComponent },
         ]),
         AngularMaterialModule,
         CoreModule
@@ -51,7 +59,7 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
         AngularMaterialModule,
         CoreModule
     ],
-    providers: [],
+    providers: [UserService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

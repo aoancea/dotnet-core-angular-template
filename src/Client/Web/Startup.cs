@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
@@ -39,6 +40,15 @@ namespace NetCore21Angular.Client.Web
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+
+            services.AddIdentity<IdentityUser, IdentityRole>((options) =>
+                {
+                    //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5D);
+                    //options.Password.RequireNonAlphanumeric = false;
+                    //options.User.RequireUniqueEmail = true;
+                })
+               .AddDefaultTokenProviders()
+               .AddEntityFrameworkStores<Database.NetCore21AngularDbContext>();
 
             Configure_CompositionRoot(services);
         }
