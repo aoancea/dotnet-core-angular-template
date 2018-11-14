@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -6,9 +7,11 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Text;
 using Unity;
 using Unity.Injection;
 using Unity.Interception.ContainerIntegration;
@@ -30,6 +33,28 @@ namespace NetCore21Angular.Client.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters =
+                        new TokenValidationParameters
+                        {
+                            ValidateIssuer = true,
+                            ValidateAudience = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+                            ValidIssuer = Configuration.GetValue<string>("Authentication:Issuer"),
+                            ValidAudience = Configuration.GetValue<string>("Authentication:Issuer"),
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetValue<string>("Authentication:Secret"))),
+                            ClockSkew = TimeSpan.Zero
+                        };
+                });
+
+            //services.AddAuthorization(config =>
+            //{
+            //    config.AddPolicy("default-policy", policy => policy.RequireAuthenticatedUser());
+            //});
+
             services.AddDbContext<Database.NetCore21AngularDbContext>(options =>
                   options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
@@ -41,12 +66,7 @@ namespace NetCore21Angular.Client.Web
                 configuration.RootPath = "ClientApp/dist";
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>((options) =>
-                {
-                    //options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5D);
-                    //options.Password.RequireNonAlphanumeric = false;
-                    //options.User.RequireUniqueEmail = true;
-                })
+            services.AddIdentity<IdentityUser, IdentityRole>()
                .AddDefaultTokenProviders()
                .AddEntityFrameworkStores<Database.NetCore21AngularDbContext>();
 
@@ -70,6 +90,7 @@ namespace NetCore21Angular.Client.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
+            app.UseAuthentication();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

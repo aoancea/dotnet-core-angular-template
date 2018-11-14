@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Runtime.Mapper;
 using System;
 
 namespace NetCore21Angular.Client.Web.Controllers
 {
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PeriodicElementController : Controller
     {
         private readonly Manager.Configuration.Chemistry.Contract.IPeriodicElementManager periodicElementManager;

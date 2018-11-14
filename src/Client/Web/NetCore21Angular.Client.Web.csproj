@@ -50,6 +50,8 @@
     <None Remove="ClientApp\app\core\core.module.ts" />
     <None Remove="ClientApp\app\core\guards\authentication.guard.ts" />
     <None Remove="ClientApp\app\core\services\http-request-interceptor.ts" />
+    <None Remove="ClientApp\app\login-form\login-form.models.ts" />
+    <None Remove="ClientApp\app\login-form\login-form.service.ts" />
     <None Remove="ClientApp\app\periodic-element\periodic-element.models.ts" />
     <None Remove="ClientApp\app\registration-form\registration-form.models.ts" />
     <None Remove="ClientApp\app\registration-form\registration-form.service.ts" />
@@ -68,6 +70,8 @@
     <TypeScriptCompile Include="ClientApp\app\core\core.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\core\guards\authentication.guard.ts" />
     <TypeScriptCompile Include="ClientApp\app\core\services\http-request-interceptor.ts" />
+    <TypeScriptCompile Include="ClientApp\app\login-form\login-form.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\login-form\login-form.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\periodic-element\periodic-element.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\registration-form\registration-form.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\registration-form\registration-form.service.ts" />

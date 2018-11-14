@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace NetCore21Angular.Client.Web.Controllers
 {
+    [AllowAnonymous]
     public class AccountController : Controller
     {
         private readonly UserManager<IdentityUser> userManager;
@@ -30,27 +31,7 @@ namespace NetCore21Angular.Client.Web.Controllers
             this.configuration = configuration;
         }
 
-        //[HttpPost]
-        //public async Task<IActionResult> Post([FromBody]Models.Account.RegistrationViewModel model)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-
-        //    IdentityResult result = await userManager.CreateAsync(userIdentity, model.Password);
-
-        //    if (!result.Succeeded) return new BadRequestObjectResult(Errors.AddErrorsToModelState(result, ModelState));
-
-        //    await _appDbContext.JobSeekers.AddAsync(new JobSeeker { IdentityId = userIdentity.Id, Location = model.Location });
-        //    await _appDbContext.SaveChangesAsync();
-
-        //    return new OkObjectResult("Account created");
-        //}
-
-
         [HttpPost]
-        [AllowAnonymous]
         public async Task<ActionResult> Register([FromBody]RegisterModel model)
         {
             IdentityUser identityUser = new IdentityUser() { Email = model.Email, UserName = model.Email };
@@ -69,10 +50,7 @@ namespace NetCore21Angular.Client.Web.Controllers
             return Ok(GenerateJwtToken(model.Email, user));
         }
 
-
-        [Route("login")]
         [HttpPost]
-        [AllowAnonymous]
         public async Task<ActionResult> Login([FromBody]LoginModel model)
         {
             IdentityUser user = await userManager.FindByEmailAsync(model.Email);
@@ -97,7 +75,6 @@ namespace NetCore21Angular.Client.Web.Controllers
             return await signInManager.CheckPasswordSignInAsync(user, password, lockout);
         }
 
-
         private async Task LogoutUser()
         {
             await signInManager.SignOutAsync();
@@ -112,19 +89,16 @@ namespace NetCore21Angular.Client.Web.Controllers
                 new Claim(JwtRegisteredClaimNames.Sub, email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim("adr", HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString())
             };
 
-            SymmetricSecurityKey key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration.GetValue<string>("Authentication:Secret")));
-            SigningCredentials creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            DateTime expires = DateTime.Now.AddDays(this.configuration.GetValue<int>("Authentication:ExpiryTimeInDays"));
+            SymmetricSecurityKey securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(this.configuration.GetValue<string>("Authentication:Secret")));
 
             JwtSecurityToken token = new JwtSecurityToken(
-                configuration.GetValue<string>("Authentication:Issuer"),
-                configuration.GetValue<string>("Authentication:Issuer"),
-                claims,
-                expires: expires,
-                signingCredentials: creds
+                issuer: configuration.GetValue<string>("Authentication:Issuer"),
+                audience: configuration.GetValue<string>("Authentication:Issuer"),
+                claims: claims,
+                expires: DateTime.Now.AddDays(this.configuration.GetValue<int>("Authentication:ExpiryTimeInDays")),
+                signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);

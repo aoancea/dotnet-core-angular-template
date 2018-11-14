@@ -12,7 +12,13 @@ export class HttpRequestInterceptor implements HttpInterceptor {
     ) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(
+        let authedRequest: HttpRequest<any> = request.clone(
+            {
+                headers: request.headers.set("Authorization", "Bearer " + localStorage.getItem("token"))
+            }
+        );
+
+        return next.handle(authedRequest).pipe(
             catchError(
                 (error: HttpErrorResponse, caught: Observable<HttpEvent<HttpErrorResponse>>) => {
 
