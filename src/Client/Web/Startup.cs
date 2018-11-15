@@ -50,9 +50,13 @@ namespace NetCore21Angular.Client.Web
                         };
                 });
 
-            //services.AddAuthorization(config =>
+            // https://docs.microsoft.com/en-us/aspnet/core/security/authorization/limitingidentitybyscheme?view=aspnetcore-2.1&tabs=aspnetcore2x
+            //services.AddAuthorization(options =>
             //{
-            //    config.AddPolicy("default-policy", policy => policy.RequireAuthenticatedUser());
+            //    var defaultAuthorizationPolicyBuilder = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme);
+            //    defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
+
+            //    options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
             //});
 
             services.AddDbContext<Database.NetCore21AngularDbContext>(options =>
