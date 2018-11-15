@@ -1,9 +1,10 @@
 ﻿import { Injectable, Inject } from '@angular/core';
 import { Response, Headers, RequestOptions } from '@angular/http';
 
-import { LoginModel } from './login-form.models';
-import { Observable } from 'rxjs';
+import { Observable, Observer } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+import { LoginModel } from './login.models';
 
 @Injectable()
 export class LoginService {
@@ -11,11 +12,18 @@ export class LoginService {
     private loggedIn = false;
 
     constructor(private httpClient: HttpClient, @Inject('BASE_URL') private baseUrl: string) {
-        //this.loggedIn = !!localStorage.getItem('auth_token');
     }
 
     login(registerModel: LoginModel) {
-        return this.httpClient.post(`${this.baseUrl}Account/Login`, registerModel, { responseType: 'text' });
+        return new Observable<string>((obs: Observer<string>) => {
+            this.httpClient.post(`${this.baseUrl}Account/Login`, registerModel, { responseType: 'text' }).subscribe(tokenData => {
+
+                localStorage.setItem('token', tokenData);
+
+                obs.next(tokenData);
+                obs.complete();
+            });
+        });
     }
 
     //login(userName, password) {

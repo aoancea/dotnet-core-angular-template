@@ -21,10 +21,10 @@ import { CoreModule } from './core/core.module';
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
-import { LoginFormComponent } from './login-form/login-form.component';
+import { LoginComponent } from './login/login.component';
 
 import { UserService } from './registration-form/registration-form.service';
-import { LoginService } from './login-form/login-form.service';
+import { LoginService } from './login/login.service';
 
 @NgModule({
     declarations: [
@@ -36,7 +36,7 @@ import { LoginService } from './login-form/login-form.service';
         PeriodicElementListComponent,
         PeriodicElementEditComponent,
         RegistrationFormComponent,
-        LoginFormComponent
+        LoginComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -53,7 +53,7 @@ import { LoginService } from './login-form/login-form.service';
             { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
 
             { path: 'register', component: RegistrationFormComponent },
-            { path: 'login', component: LoginFormComponent },
+            { path: 'login', component: LoginComponent },
         ]),
         AngularMaterialModule,
         CoreModule

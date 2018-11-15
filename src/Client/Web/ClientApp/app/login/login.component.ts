@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { LoginModel } from './login-form.models';
 import { Router } from '@angular/router';
-import { LoginService } from './login-form.service';
+
+import { LoginModel } from './login.models';
+import { LoginService } from './login.service';
 
 @Component({
-    selector: 'app-login-form',
-    templateUrl: './login-form.component.html',
-    styleUrls: ['./login-form.component.css']
+    selector: 'app-login',
+    templateUrl: './login.component.html',
+    styleUrls: ['./login.component.css']
 })
-export class LoginFormComponent implements OnInit {
+export class LoginComponent implements OnInit {
 
     public loginModel: LoginModel = <LoginModel>{};
 
@@ -20,12 +21,7 @@ export class LoginFormComponent implements OnInit {
     }
 
     registerUser() {
-
         this.loginService.login(this.loginModel).subscribe(x => {
-
-            // save token
-            localStorage.setItem('token', x);
-
             this.router.navigate(['/periodic-elements']);
         });
     }
