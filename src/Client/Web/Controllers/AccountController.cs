@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using NetCore21Angular.Client.Web.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -67,8 +68,6 @@ namespace NetCore21Angular.Client.Web.Controllers
             return Ok(GenerateJwtToken(model.Email, user));
         }
 
-
-
         #region Helpers
         private async Task<Microsoft.AspNetCore.Identity.SignInResult> LoginUser(IdentityUser user, string password, bool lockout)
         {
@@ -80,7 +79,6 @@ namespace NetCore21Angular.Client.Web.Controllers
             await signInManager.SignOutAsync();
             return;
         }
-
 
         private string GenerateJwtToken(string email, IdentityUser user)
         {
@@ -102,20 +100,6 @@ namespace NetCore21Angular.Client.Web.Controllers
             );
 
             return new JwtSecurityTokenHandler().WriteToken(token);
-        }
-
-        public struct RegisterModel
-        {
-            public string Email { get; set; }
-
-            public string Password { get; set; }
-        }
-
-        public struct LoginModel
-        {
-            public string Email { get; set; }
-
-            public string Password { get; set; }
         }
         #endregion
     }
