@@ -50,12 +50,8 @@
     <None Remove="ClientApp\app\core\core.module.ts" />
     <None Remove="ClientApp\app\core\guards\authentication.guard.ts" />
     <None Remove="ClientApp\app\core\services\http-request-interceptor.ts" />
-    <None Remove="ClientApp\app\login\login.models.ts" />
     <None Remove="ClientApp\app\login\login.module.ts" />
-    <None Remove="ClientApp\app\login\login.service.ts" />
     <None Remove="ClientApp\app\periodic-element\periodic-element.models.ts" />
-    <None Remove="ClientApp\app\registration\registration.models.ts" />
-    <None Remove="ClientApp\app\registration\registration.service.ts" />
     <None Remove="ClientApp\app\shared\angular-material.module.ts" />
     <None Remove="npm-debug.log" />
   </ItemGroup>
@@ -71,12 +67,8 @@
     <TypeScriptCompile Include="ClientApp\app\core\core.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\core\guards\authentication.guard.ts" />
     <TypeScriptCompile Include="ClientApp\app\core\services\http-request-interceptor.ts" />
-    <TypeScriptCompile Include="ClientApp\app\login\login.models.ts" />
     <TypeScriptCompile Include="ClientApp\app\login\login.module.ts" />
-    <TypeScriptCompile Include="ClientApp\app\login\login.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\periodic-element\periodic-element.models.ts" />
-    <TypeScriptCompile Include="ClientApp\app\registration\registration.models.ts" />
-    <TypeScriptCompile Include="ClientApp\app\registration\registration.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\angular-material.module.ts" />
   </ItemGroup>
 

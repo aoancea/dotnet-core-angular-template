@@ -23,9 +23,6 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 
-import { UserService } from './registration/registration.service';
-import { LoginService } from './login/login.service';
-
 @NgModule({
     declarations: [
         AppComponent,
@@ -62,7 +59,7 @@ import { LoginService } from './login/login.service';
         AngularMaterialModule,
         CoreModule
     ],
-    providers: [UserService, LoginService],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -33,29 +33,29 @@ namespace NetCore21Angular.Client.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Register([FromBody]RegisterModel model)
+        public async Task<ActionResult> Register([FromBody]RegisterModel registerModel)
         {
-            IdentityUser identityUser = new IdentityUser() { Email = model.Email, UserName = model.Email };
+            IdentityUser identityUser = new IdentityUser() { Email = registerModel.Email, UserName = registerModel.Email };
 
-            IdentityResult result = await userManager.CreateAsync(identityUser, model.Password);
+            IdentityResult result = await userManager.CreateAsync(identityUser, registerModel.Password);
 
             if (!result.Succeeded)
             {
                 return BadRequest(result.ToString());
             }
 
-            IdentityUser user = await userManager.FindByEmailAsync(model.Email);
+            IdentityUser user = await userManager.FindByEmailAsync(registerModel.Email);
 
-            await LoginUser(user, model.Password, false);
+            await LoginUser(user, registerModel.Password, false);
 
-            return Ok(GenerateJwtToken(model.Email, user));
+            return Ok(GenerateToken(registerModel.Email, user));
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login([FromBody]LoginModel model)
+        public async Task<ActionResult> Login([FromBody]LoginModel loginModel)
         {
-            IdentityUser user = await userManager.FindByEmailAsync(model.Email);
-            Microsoft.AspNetCore.Identity.SignInResult result = await LoginUser(user, model.Password, true);
+            IdentityUser user = await userManager.FindByEmailAsync(loginModel.Email);
+            Microsoft.AspNetCore.Identity.SignInResult result = await LoginUser(user, loginModel.Password, true);
             if (!result.Succeeded)
             {
                 if (result.IsLockedOut)
@@ -65,10 +65,9 @@ namespace NetCore21Angular.Client.Web.Controllers
                 return BadRequest("WrongUserOrPassword");
             }
 
-            return Ok(GenerateJwtToken(model.Email, user));
+            return Ok(GenerateToken(loginModel.Email, user));
         }
 
-        #region Helpers
         private async Task<Microsoft.AspNetCore.Identity.SignInResult> LoginUser(IdentityUser user, string password, bool lockout)
         {
             return await signInManager.CheckPasswordSignInAsync(user, password, lockout);
@@ -80,7 +79,7 @@ namespace NetCore21Angular.Client.Web.Controllers
             return;
         }
 
-        private string GenerateJwtToken(string email, IdentityUser user)
+        private Token GenerateToken(string email, IdentityUser user)
         {
             List<Claim> claims = new List<Claim>
             {
@@ -99,8 +98,11 @@ namespace NetCore21Angular.Client.Web.Controllers
                 signingCredentials: new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256)
             );
 
-            return new JwtSecurityTokenHandler().WriteToken(token);
+            return new Token()
+            {
+                Value = new JwtSecurityTokenHandler().WriteToken(token),
+                Expiry = token.ValidTo,
+            };
         }
-        #endregion
     }
 }

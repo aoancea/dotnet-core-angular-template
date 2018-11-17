@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginModel } from './login.models';
-import { LoginService } from './login.service';
+import { SecurityService } from '../core/services/security.service';
+import { LoginModel } from '../core/services/security.models';
 
 @Component({
     selector: 'app-login',
@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
 
     public loginModel: LoginModel = <LoginModel>{};
 
-    constructor(private loginService: LoginService, private router: Router) {
+    constructor(private securityService: SecurityService, private router: Router) {
 
     }
 
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     }
 
     registerUser() {
-        this.loginService.login(this.loginModel).subscribe(x => {
+        this.securityService.login(this.loginModel).subscribe(x => {
             this.router.navigate(['/periodic-elements']);
         });
     }

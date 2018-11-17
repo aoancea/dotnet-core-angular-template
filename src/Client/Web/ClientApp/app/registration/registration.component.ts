@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RegisterModel } from './registration.models';
-import { UserService } from './registration.service';
+import { SecurityService } from '../core/services/security.service';
+import { RegisterModel } from '../core/services/security.models';
 
 @Component({
     selector: 'app-registration',
@@ -13,7 +13,7 @@ export class RegistrationComponent implements OnInit {
 
     public registerModel: RegisterModel = <RegisterModel>{};
 
-    constructor(private userService: UserService, private router: Router) {
+    constructor(private securityService: SecurityService, private router: Router) {
 
     }
 
@@ -22,7 +22,7 @@ export class RegistrationComponent implements OnInit {
 
     registerUser() {
 
-        this.userService.register(this.registerModel).subscribe(x => {
+        this.securityService.register(this.registerModel).subscribe(x => {
             this.router.navigate(['/periodic-elements']);
         });
     }

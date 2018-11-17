@@ -5,12 +5,15 @@ import { AuthenticationGuard } from './guards/authentication.guard';
 
 import { HttpRequestInterceptor } from './services/http-request-interceptor';
 
+import { SecurityService } from './services/security.service';
+
 @NgModule({
     declarations: [
     ],
     imports: [],
     providers: [
         AuthenticationGuard,
+        SecurityService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpRequestInterceptor,
