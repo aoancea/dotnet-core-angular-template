@@ -54,8 +54,8 @@
     <None Remove="ClientApp\app\login\login.module.ts" />
     <None Remove="ClientApp\app\login\login.service.ts" />
     <None Remove="ClientApp\app\periodic-element\periodic-element.models.ts" />
-    <None Remove="ClientApp\app\registration-form\registration-form.models.ts" />
-    <None Remove="ClientApp\app\registration-form\registration-form.service.ts" />
+    <None Remove="ClientApp\app\registration\registration.models.ts" />
+    <None Remove="ClientApp\app\registration\registration.service.ts" />
     <None Remove="ClientApp\app\shared\angular-material.module.ts" />
     <None Remove="npm-debug.log" />
   </ItemGroup>
@@ -75,8 +75,8 @@
     <TypeScriptCompile Include="ClientApp\app\login\login.module.ts" />
     <TypeScriptCompile Include="ClientApp\app\login\login.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\periodic-element\periodic-element.models.ts" />
-    <TypeScriptCompile Include="ClientApp\app\registration-form\registration-form.models.ts" />
-    <TypeScriptCompile Include="ClientApp\app\registration-form\registration-form.service.ts" />
+    <TypeScriptCompile Include="ClientApp\app\registration\registration.models.ts" />
+    <TypeScriptCompile Include="ClientApp\app\registration\registration.service.ts" />
     <TypeScriptCompile Include="ClientApp\app\shared\angular-material.module.ts" />
   </ItemGroup>
 

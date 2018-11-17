@@ -1,7 +1,7 @@
 ﻿import { Injectable, Inject } from '@angular/core';
 import { Response, Headers, RequestOptions } from '@angular/http';
 
-import { RegisterModel } from './registration-form.models';
+import { RegisterModel } from './registration.models';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 

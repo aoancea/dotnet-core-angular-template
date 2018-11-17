@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { RegisterModel } from './registration-form.models';
-import { UserService } from './registration-form.service';
+import { RegisterModel } from './registration.models';
+import { UserService } from './registration.service';
 
 @Component({
-    selector: 'app-registration-form',
-    templateUrl: './registration-form.component.html',
-    styleUrls: ['./registration-form.component.css']
+    selector: 'app-registration',
+    templateUrl: './registration.component.html',
+    styleUrls: ['./registration.component.css']
 })
-export class RegistrationFormComponent implements OnInit {
+export class RegistrationComponent implements OnInit {
 
     public registerModel: RegisterModel = <RegisterModel>{};
 

@@ -20,10 +20,10 @@ import { CoreModule } from './core/core.module';
 
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 
-import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
 
-import { UserService } from './registration-form/registration-form.service';
+import { UserService } from './registration/registration.service';
 import { LoginService } from './login/login.service';
 
 @NgModule({
@@ -35,7 +35,7 @@ import { LoginService } from './login/login.service';
         FetchDataComponent,
         PeriodicElementListComponent,
         PeriodicElementEditComponent,
-        RegistrationFormComponent,
+        RegistrationComponent,
         LoginComponent
     ],
     imports: [
@@ -52,7 +52,7 @@ import { LoginService } from './login/login.service';
             { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
             { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
 
-            { path: 'register', component: RegistrationFormComponent },
+            { path: 'register', component: RegistrationComponent },
             { path: 'login', component: LoginComponent },
         ]),
         AngularMaterialModule,
