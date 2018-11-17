@@ -2,10 +2,12 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PeriodicElementService } from './periodic-element.service';
+import { CoreModule } from '../core/core.module';
 
 @NgModule({
     imports: [
-        CommonModule
+        CommonModule,
+        CoreModule
     ],
     declarations: [],
     providers: [PeriodicElementService]

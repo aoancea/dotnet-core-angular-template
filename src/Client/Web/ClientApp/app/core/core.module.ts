@@ -7,6 +7,7 @@ import { HttpRequestInterceptor } from './services/http-request-interceptor';
 
 import { SecurityService } from './services/security.service';
 import { TokenService } from './services/token.service';
+import { ApplicationService } from './services/application.service';
 
 @NgModule({
     declarations: [
@@ -16,6 +17,7 @@ import { TokenService } from './services/token.service';
         AuthenticationGuard,
         SecurityService,
         TokenService,
+        ApplicationService,
         {
             provide: HTTP_INTERCEPTORS,
             useClass: HttpRequestInterceptor,

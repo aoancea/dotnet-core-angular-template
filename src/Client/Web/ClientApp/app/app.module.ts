@@ -15,6 +15,8 @@ import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { PeriodicElementListComponent } from './periodic-element/periodic-element-list/periodic-element-list.component';
 import { PeriodicElementEditComponent } from './periodic-element/periodic-element-edit/periodic-element-edit.component';
 
+import { PeriodicElementService } from './periodic-element/periodic-element.service';
+
 import { AngularMaterialModule } from './shared/angular-material.module';
 import { CoreModule } from './core/core.module';
 
@@ -59,7 +61,7 @@ import { LoginComponent } from './login/login.component';
         AngularMaterialModule,
         CoreModule
     ],
-    providers: [],
+    providers: [PeriodicElementService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
