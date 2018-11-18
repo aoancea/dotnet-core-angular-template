@@ -12,11 +12,6 @@ import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
 
-import { PeriodicElementListComponent } from './periodic-element/periodic-element-list/periodic-element-list.component';
-import { PeriodicElementEditComponent } from './periodic-element/periodic-element-edit/periodic-element-edit.component';
-
-import { PeriodicElementService } from './periodic-element/periodic-element.service';
-
 import { AngularMaterialModule } from './shared/angular-material.module';
 import { CoreModule } from './core/core.module';
 
@@ -35,9 +30,8 @@ const routes: Routes = [
             { path: '', component: HomeComponent, pathMatch: 'full' },
             { path: 'counter', component: CounterComponent },
             { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'periodic-elements', component: PeriodicElementListComponent, canActivate: [AuthenticationGuard] },
-            { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
-            { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
+
+            { path: 'periodic-elements', loadChildren: './periodic-element/periodic-element.module#PeriodicElementModule', canActivate: [AuthenticationGuard] }
         ]
     }
 ];
@@ -49,8 +43,6 @@ const routes: Routes = [
         HomeComponent,
         CounterComponent,
         FetchDataComponent,
-        PeriodicElementListComponent,
-        PeriodicElementEditComponent,
         RegistrationComponent,
         LoginComponent,
         ExampleAppComponent
@@ -69,7 +61,7 @@ const routes: Routes = [
         AngularMaterialModule,
         CoreModule
     ],
-    providers: [PeriodicElementService],
+    providers: [],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
