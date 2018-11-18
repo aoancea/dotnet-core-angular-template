@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Route, Routes } from '@angular/router';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -24,6 +24,24 @@ import { AuthenticationGuard } from './core/guards/authentication.guard';
 
 import { RegistrationComponent } from './registration/registration.component';
 import { LoginComponent } from './login/login.component';
+import { ExampleAppComponent } from './example-app/example-app.component';
+
+const routes: Routes = [
+    {
+        path: '', component: ExampleAppComponent,
+        children: [
+            { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: 'counter', component: CounterComponent },
+            { path: 'fetch-data', component: FetchDataComponent },
+            { path: 'periodic-elements', component: PeriodicElementListComponent, canActivate: [AuthenticationGuard] },
+            { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
+            { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
+
+            { path: 'register', component: RegistrationComponent },
+            { path: 'login', component: LoginComponent },
+        ]
+    }
+];
 
 @NgModule({
     declarations: [
@@ -35,7 +53,8 @@ import { LoginComponent } from './login/login.component';
         PeriodicElementListComponent,
         PeriodicElementEditComponent,
         RegistrationComponent,
-        LoginComponent
+        LoginComponent,
+        ExampleAppComponent
     ],
     imports: [
         BrowserAnimationsModule,
@@ -43,17 +62,7 @@ import { LoginComponent } from './login/login.component';
         HttpClientModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule.forRoot([
-            { path: '', component: HomeComponent, pathMatch: 'full' },
-            { path: 'counter', component: CounterComponent },
-            { path: 'fetch-data', component: FetchDataComponent },
-            { path: 'periodic-elements', component: PeriodicElementListComponent, canActivate: [AuthenticationGuard] },
-            { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
-            { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
-
-            { path: 'register', component: RegistrationComponent },
-            { path: 'login', component: LoginComponent },
-        ]),
+        RouterModule.forRoot(routes),
         AngularMaterialModule,
         CoreModule
     ],
