@@ -27,6 +27,8 @@ import { LoginComponent } from './login/login.component';
 import { ExampleAppComponent } from './example-app/example-app.component';
 
 const routes: Routes = [
+    { path: 'register', component: RegistrationComponent },
+    { path: 'login', component: LoginComponent },
     {
         path: '', component: ExampleAppComponent,
         children: [
@@ -36,9 +38,6 @@ const routes: Routes = [
             { path: 'periodic-elements', component: PeriodicElementListComponent, canActivate: [AuthenticationGuard] },
             { path: 'periodic-element-edit/:id', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
             { path: 'periodic-element-edit', component: PeriodicElementEditComponent, canActivate: [AuthenticationGuard] },
-
-            { path: 'register', component: RegistrationComponent },
-            { path: 'login', component: LoginComponent },
         ]
     }
 ];
