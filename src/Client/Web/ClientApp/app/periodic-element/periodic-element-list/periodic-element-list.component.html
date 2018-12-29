@@ -3,7 +3,7 @@
 <p>Many period elements in the list</p>
 
 <div class="example-button-row">
-    <button mat-raised-button [routerLink]='["/periodic-element-edit"]' color="primary">Add</button>
+    <button mat-raised-button [routerLink]='["../edit"]' color="primary">Add</button>
 </div>
 
 <table mat-table [dataSource]="periodicElements" class="mat-elevation-z8">
@@ -39,7 +39,7 @@
         <th mat-header-cell *matHeaderCellDef style="width:8%"> Action </th>
         <td mat-cell *matCellDef="let element">
             <button mat-icon-button matTooltip="Edit" [matTooltipPosition]="'after'">
-                <mat-icon aria-label="Example icon-button with a heart icon" [routerLink]="['../periodic-element-edit', element.id]">edit</mat-icon>
+                <mat-icon aria-label="Example icon-button with a heart icon" [routerLink]="['../edit', element.id]">edit</mat-icon>
             </button>
 
             <button mat-icon-button matTooltip="Delete" [matTooltipPosition]="'after'">

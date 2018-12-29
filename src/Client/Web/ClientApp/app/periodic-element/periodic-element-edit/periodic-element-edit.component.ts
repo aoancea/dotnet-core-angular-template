@@ -14,6 +14,8 @@ import { ValidationError } from '../../core/core.models';
 })
 export class PeriodicElementEditComponent implements OnInit {
 
+    private routerLink: string = '../list';
+
     private periodicElementID: string;
 
     public periodicElement: PeriodicElement;
@@ -35,6 +37,8 @@ export class PeriodicElementEditComponent implements OnInit {
         this.periodicElementID = this.route.snapshot.params['id'];
 
         if (this.periodicElementID) {
+            this.routerLink = '../../list';
+
             this.periodicElementService.detailPeriodicElementByID(this.periodicElementID).subscribe(res => {
                 this.periodicElement = res;
                 this.initForm(this.periodicElement);
