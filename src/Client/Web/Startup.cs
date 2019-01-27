@@ -60,7 +60,16 @@ namespace NetCore21Angular.Client.Web
             //});
 
             services.AddDbContext<Database.NetCore21AngularDbContext>(options =>
-                  options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            {
+                if (Configuration.GetValue("UseMySql", false))
+                {
+                    options.UseMySql(Configuration.GetConnectionString("MySqlDefaultConnection"));
+                }
+                else
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                }
+            });
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
