@@ -1,16 +1,16 @@
 # dotnet-core-angular-template
 
-### Installation steps
+## Installation steps
  * `cd ../src/Client/Web`
  * `npm install`
  * `ng build`
  * `dotnet ef database update`
  * F5
 
-### Architectural style
+## Architectural style
  * IDesign
 
-### Technology stack
+## Technology stack
  * ASP.NET Core
  * Angular 7
  * MsSql Server
@@ -18,7 +18,7 @@
  * Angular Material Design
  
  
- ### Useful commands/templates
+## Useful commands/templates
  
 **Azure MsSQL connection string**
 
