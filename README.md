@@ -39,3 +39,7 @@
 **Start ASP.NET Core App after publish to specific folder**
 
 `dotnet run output/NetCore21Angular.Client.Web.dll`
+
+**Start ASP.NET Core App in Production mode**
+
+`dotnet run --environment "Production"`
