@@ -16,3 +16,7 @@
  * MsSql Server
  * Entity Framework Core
  * Angular Material Design
+ 
+ 
+ ### Useful commands/templates
+  * Azure MsSQL connection string: `Data Source=tcp:{server}.database.windows.net,1433;Initial Catalog={database_name};User ID={username}@{server};Password={password}`
