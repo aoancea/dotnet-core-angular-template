@@ -28,6 +28,10 @@
 
 `ng build --watch`
 
+**Angular build in Production mode**
+
+`ng build --prod`
+
 **Publish ASP.NET Core App to specific folder(don't forget to build the Angular app first)**
 
 `dotnet publish --configuration release --output output`
