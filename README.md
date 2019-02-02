@@ -27,3 +27,11 @@
 **Angular build & watch for changes(during development)**
 
 `ng build --watch`
+
+**Publish ASP.NET Core App to specific folder(don't forget to build the Angular app first)**
+
+`dotnet publish --configuration release --output output`
+
+**Start ASP.NET Core App after publish to specific folder**
+
+`dotnet run output/NetCore21Angular.Client.Web.dll`
