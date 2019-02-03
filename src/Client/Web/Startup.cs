@@ -87,6 +87,8 @@ namespace NetCore21Angular.Client.Web
             }
             else
             {
+                UpdateDatabase(app, env);
+
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
@@ -117,6 +119,17 @@ namespace NetCore21Angular.Client.Web
                 //    spa.UseAngularCliServer(npmScript: "start");
                 //}
             });
+        }
+
+        private void UpdateDatabase(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (Database.NetCore21AngularDbContext netCore21AngularDbContext = serviceScope.ServiceProvider.GetService<Database.NetCore21AngularDbContext>())
+                {
+                    netCore21AngularDbContext.Database.Migrate();
+                }
+            }
         }
 
         private void Configure_CompositionRoot(IServiceCollection services)
