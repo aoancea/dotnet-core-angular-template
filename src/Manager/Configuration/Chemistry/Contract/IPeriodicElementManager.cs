@@ -10,6 +10,8 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry.Contract
 
         PeriodicElement DetailPeriodicElementByID(Guid periodicElementID);
 
+        PeriodicElementForEdit LoadForEdit(Guid? periodicElementID);
+
         Infrastructure.ValidationError[] SavePeriodicElement(PeriodicElement periodicElement);
 
         void DeletePeriodicElement(Guid periodicElementID);

@@ -19,4 +19,9 @@ namespace NetCore21Angular.Client.Web.Models
     {
         public Isotope[] Isotopes { get; set; }
     }
+
+    public class PeriodicElementForEdit
+    {
+        public PeriodicElement PeriodicElement { get; set; }
+    }
 }

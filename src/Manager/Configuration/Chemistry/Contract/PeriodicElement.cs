@@ -19,4 +19,9 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry.Contract
     {
         public Isotope[] Isotopes { get; set; }
     }
+
+    public class PeriodicElementForEdit
+    {
+        public PeriodicElement PeriodicElement { get; set; }
+    }
 }

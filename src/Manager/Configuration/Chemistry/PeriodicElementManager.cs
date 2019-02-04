@@ -31,7 +31,15 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
         {
             return periodicElementResource.DetailPeriodicElementByID(periodicElementID).DeepCopyTo<Contract.PeriodicElement>();
         }
-        
+
+        public Contract.PeriodicElementForEdit LoadForEdit(Guid? periodicElementID)
+        {
+            Contract.PeriodicElementForEdit periodicElementForEdit = new Contract.PeriodicElementForEdit();
+            periodicElementForEdit.PeriodicElement = periodicElementID.HasValue ? periodicElementResource.DetailPeriodicElementByID(periodicElementID.Value).DeepCopyTo<Contract.PeriodicElement>() : null;
+
+            return periodicElementForEdit;
+        }
+
         public Infrastructure.ValidationError[] SavePeriodicElement(Contract.PeriodicElement periodicElement)
         {
             Infrastructure.ValidationError[] validationErrors = periodicElementValidationEngine.ValidatePeriodicElement(periodicElement.DeepCopyTo<Engine.Validation.Configuration.Contract.PeriodicElement>());
