@@ -62,24 +62,15 @@ export class PeriodicElementEditComponent implements OnInit {
 
             if (this.isEdit) {
                 this.periodicElement.id = this.periodicElementID;
+            }
 
-                this.periodicElementService.updatePeriodicElement(this.periodicElement).subscribe((validationErrors: ValidationError[]) => {
-                    if (validationErrors.length != 0) {
-                        this.displayErrorMessages(validationErrors)
-                    } else {
-                        this.router.navigate(['/periodic-elements']);
-                    }
-                });
-            }
-            else {
-                this.periodicElementService.createPeriodicElement(this.periodicElement).subscribe((validationErrors: ValidationError[]) => {
-                    if (validationErrors.length != 0) {
-                        this.displayErrorMessages(validationErrors)
-                    } else {
-                        this.router.navigate(['/periodic-elements']);
-                    }
-                });
-            }
+            this.periodicElementService.savePeriodicElement(this.periodicElement).subscribe((validationErrors: ValidationError[]) => {
+                if (validationErrors.length != 0) {
+                    this.displayErrorMessages(validationErrors)
+                } else {
+                    this.router.navigate(['/periodic-elements']);
+                }
+            });
         }
     }
 
