@@ -13,3 +13,7 @@ export interface PeriodicElement extends PeriodicElementHeader {
 export interface Isotope {
     name: string;
 }
+
+export interface PeriodicElementForEdit {
+    periodicElement: PeriodicElement;
+}

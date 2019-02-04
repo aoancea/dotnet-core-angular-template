@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, AbstractControl, FormArray, FormBuilder } from '@angular/forms';
 import { map } from 'rxjs/operators';
 
-import { PeriodicElement, Isotope } from './../periodic-element.models';
+import { PeriodicElement, Isotope, PeriodicElementForEdit } from './../periodic-element.models';
 import { Router, ActivatedRoute } from '@angular/router';
 import { PeriodicElementService } from '../periodic-element.service';
 import { ValidationError } from '../../core/core.models';
@@ -16,9 +16,9 @@ export class PeriodicElementEditComponent implements OnInit {
 
     private routerLink: string = '../list';
 
-    private periodicElementID: string;
+    public periodicForEdit: PeriodicElementForEdit;
 
-    public periodicElement: PeriodicElement;
+    private periodicElementID: string;
 
     private isEdit: boolean = false;
 
@@ -36,18 +36,15 @@ export class PeriodicElementEditComponent implements OnInit {
 
         this.periodicElementID = this.route.snapshot.params['id'];
 
-        if (this.periodicElementID) {
+        if (this.periodicElementID)
             this.routerLink = '../../list';
 
-            this.periodicElementService.detailPeriodicElementByID(this.periodicElementID).subscribe(res => {
-                this.periodicElement = res;
-                this.initForm(this.periodicElement);
-                this.isEdit = true;
-            });
-        } else {
-            this.isEdit = false;
-            this.initForm(<PeriodicElement>{});
-        }
+        this.periodicElementService.loadPeriodicElementForEdit(this.periodicElementID).subscribe(res => {
+            this.periodicForEdit = res;
+            this.initForm(this.periodicForEdit.periodicElement ? this.periodicForEdit.periodicElement : <PeriodicElement>{});
+            this.isEdit = true;
+        });
+
     }
 
     save() {
@@ -58,13 +55,13 @@ export class PeriodicElementEditComponent implements OnInit {
         });
 
         if (this.formGroup.valid) {
-            this.periodicElement = this.formGroup.value as PeriodicElement;
+            let periodicElement = this.formGroup.value as PeriodicElement;
 
             if (this.isEdit) {
-                this.periodicElement.id = this.periodicElementID;
+                periodicElement.id = this.periodicElementID;
             }
 
-            this.periodicElementService.savePeriodicElement(this.periodicElement).subscribe((validationErrors: ValidationError[]) => {
+            this.periodicElementService.savePeriodicElement(periodicElement).subscribe((validationErrors: ValidationError[]) => {
                 if (validationErrors.length != 0) {
                     this.displayErrorMessages(validationErrors)
                 } else {
