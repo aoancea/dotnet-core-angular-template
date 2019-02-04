@@ -53,6 +53,15 @@ namespace NetCore21Angular.Client.Web.Controllers
             return periodicElementManager.UpdatePeriodicElement(managerPeriodicElement);
         }
 
+        [HttpPost]
+        public Infrastructure.ValidationError[] SavePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
+        {
+            Manager.Configuration.Chemistry.Contract.PeriodicElement managerPeriodicElement = periodicElement.DeepCopyTo<Manager.Configuration.Chemistry.Contract.PeriodicElement>();
+            managerPeriodicElement.Isotopes = new Manager.Configuration.Chemistry.Contract.Isotope[0];
+
+            return periodicElementManager.SavePeriodicElement(managerPeriodicElement);
+        }
+
         [HttpDelete]
         public void DeletePeriodicElement(Guid periodicElementID)
         {

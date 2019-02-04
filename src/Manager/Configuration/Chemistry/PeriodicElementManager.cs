@@ -56,6 +56,18 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
             return new Infrastructure.ValidationError[0];
         }
 
+        public Infrastructure.ValidationError[] SavePeriodicElement(Contract.PeriodicElement periodicElement)
+        {
+            Infrastructure.ValidationError[] validationErrors = periodicElementValidationEngine.ValidatePeriodicElement(periodicElement.DeepCopyTo<Engine.Validation.Configuration.Contract.PeriodicElement>());
+
+            if (validationErrors.Any())
+                return validationErrors;
+
+            periodicElementResource.SavePeriodicElement(periodicElement.DeepCopyTo<Resource.Configuration.Chemistry.Contract.PeriodicElement>());
+
+            return new Infrastructure.ValidationError[0];
+        }
+
         public void DeletePeriodicElement(Guid periodicElementID)
         {
             periodicElementResource.DeletePeriodicElement(periodicElementID);
