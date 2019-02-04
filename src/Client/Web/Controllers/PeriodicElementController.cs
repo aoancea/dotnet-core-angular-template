@@ -29,12 +29,6 @@ namespace NetCore21Angular.Client.Web.Controllers
         }
 
         [HttpGet]
-        public Models.PeriodicElement GetPeriodicElementByID(Guid periodicElementID)
-        {
-            return periodicElementManager.DetailPeriodicElementByID(periodicElementID).DeepCopyTo<Models.PeriodicElement>();
-        }
-
-        [HttpGet]
         public Models.PeriodicElementForEdit LoadForEdit(Guid? periodicElementID)
         {
             return periodicElementManager.LoadForEdit(periodicElementID).DeepCopyTo<Models.PeriodicElementForEdit>();

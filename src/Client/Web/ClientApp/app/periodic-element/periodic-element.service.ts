@@ -20,10 +20,6 @@ export class PeriodicElementService {
         return this.http.get<PeriodicElement[]>(`${this.applicationService.baseUrl}PeriodicElement/ListPeriodicElements`);
     }
 
-    detailPeriodicElementByID(periodicElementID: string) {
-        return this.http.get<PeriodicElement>(`${this.applicationService.baseUrl}PeriodicElement/GetPeriodicElementByID?periodicElementID=${periodicElementID}`);
-    }
-
     loadPeriodicElementForEdit(periodicElementID: string) {
         return this.http.get<PeriodicElementForEdit>(`${this.applicationService.baseUrl}PeriodicElement/LoadForEdit?periodicElementID=${periodicElementID}`);
     }
