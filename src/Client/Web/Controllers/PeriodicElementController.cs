@@ -56,6 +56,9 @@ namespace NetCore21Angular.Client.Web.Controllers
         [HttpPost]
         public Infrastructure.ValidationError[] SavePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
         {
+            if (periodicElement.ID == Guid.Empty)
+                periodicElement.ID = Guid.NewGuid();
+
             Manager.Configuration.Chemistry.Contract.PeriodicElement managerPeriodicElement = periodicElement.DeepCopyTo<Manager.Configuration.Chemistry.Contract.PeriodicElement>();
             managerPeriodicElement.Isotopes = new Manager.Configuration.Chemistry.Contract.Isotope[0];
 
