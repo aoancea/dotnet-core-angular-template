@@ -46,6 +46,6 @@
 
 ## Docker clean up commands
 
-**Clean up images with no tag**
+**Remove images without tag**
 
 ``docker rmi $(docker images --filter “dangling=true” -q --no-trunc)``
