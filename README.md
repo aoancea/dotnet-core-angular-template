@@ -43,3 +43,9 @@
 **Start ASP.NET Core App in Production mode**
 
 `dotnet run --environment "Production"`
+
+## Docker clean up commands
+
+**Clean up images with no tag**
+
+``docker rmi $(docker images --filter “dangling=true” -q --no-trunc)``
