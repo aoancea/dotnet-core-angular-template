@@ -44,8 +44,17 @@
 
 `dotnet run --environment "Production"`
 
-## Docker clean up commands
+## Docker commands
 
 **Remove images without tag**
 
 ``docker rmi $(docker images --filter “dangling=true” -q --no-trunc)``
+
+**Build dockerfile**
+
+``docker build -t core-api .``
+
+**Run docker image**
+
+``docker run --name core-api --env ASPNETCORE_ENVIRONMENT=Development -p 8080:80 core-api:latest``
+
