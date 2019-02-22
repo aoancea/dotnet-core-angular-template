@@ -1,0 +1,8 @@
+https://github.com/moby/moby/issues/23371
+
+https://github.com/csharpfritz/dotnet-docs/blob/master/docs/standard/microservices-architecture/multi-container-microservice-net-applications/multi-container-applications-docker-compose.md
+
+https://github.com/docker/docker.github.io/blob/master/compose/aspnet-mssql-compose.md
+
+
+https://docs.docker.com/compose/aspnet-mssql-compose/
