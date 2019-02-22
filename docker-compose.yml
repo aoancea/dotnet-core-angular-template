@@ -4,6 +4,8 @@ services:
     build: .
     image: net-core-angular:dev
     container_name: net-core-angular
+    environment:
+      - CONNECTIONSTRING_MSSQL=Server=db;Initial Catalog=NetCore21Angular;User ID=sa; Password=Password1!
     ports:
       - 8456:80
 
