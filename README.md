@@ -58,3 +58,11 @@
 
 ``docker run --name core-api --env ASPNETCORE_ENVIRONMENT=Development -p 8080:80 core-api:latest``
 
+## Docker compose commands
+**Build docker compose**
+
+``docker-compose build``
+
+**Run docker compose**
+
+``docker-compose up``
