@@ -140,12 +140,14 @@ namespace NetCore21Angular.Client.Web
         {
             // Manager
             services.AddTransient<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager, Manager.Configuration.Chemistry.PeriodicElementManager>();
+            services.AddTransient<Manager.Configuration.IPeopleManager, Manager.Configuration.PeopleManager>();
 
             // Engine
             services.AddTransient<Engine.Validation.Configuration.Contract.IPeriodicElementValidationEngine, Engine.Validation.Configuration.PeriodicElementValidationEngine>();
 
             // Resource
             services.AddTransient<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>();
+            services.AddTransient<Resource.Configuration.IPeopleResource, Resource.Configuration.PeopleResource>();
         }
 
         private void Configure_CompositionRoot_Test(IServiceCollection services)
