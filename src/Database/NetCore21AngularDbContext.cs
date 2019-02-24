@@ -9,6 +9,8 @@ namespace NetCore21Angular.Database
 
         public DbSet<Models.Isotope> Isotopes { get; set; }
 
+        public DbSet<Models.Person> People { get; set; }
+
         public NetCore21AngularDbContext(DbContextOptions<NetCore21AngularDbContext> options)
             : base(options)
         { }
