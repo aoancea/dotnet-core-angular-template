@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, Inject } from '@angular/core';
 
-import { PeriodicElement, PeriodicElementHeader } from './periodic-element.models';
+import { PeriodicElement, PeriodicElementHeader, PeriodicElementForEdit } from './periodic-element.models';
 import { ValidationError } from '../core/core.models';
 import { ApplicationService } from '../core/services/application.service';
 
@@ -20,16 +20,12 @@ export class PeriodicElementService {
         return this.http.get<PeriodicElement[]>(`${this.applicationService.baseUrl}PeriodicElement/ListPeriodicElements`);
     }
 
-    detailPeriodicElementByID(periodicElementID: string) {
-        return this.http.get<PeriodicElement>(`${this.applicationService.baseUrl}PeriodicElement/GetPeriodicElementByID?periodicElementID=${periodicElementID}`);
+    loadPeriodicElementForEdit(periodicElementID: string) {
+        return this.http.get<PeriodicElementForEdit>(`${this.applicationService.baseUrl}PeriodicElement/LoadForEdit?periodicElementID=${periodicElementID}`);
     }
 
-    createPeriodicElement(periodicElement: PeriodicElement) {
-        return this.http.post<any>(`${this.applicationService.baseUrl}PeriodicElement/CreatePeriodicElement`, periodicElement);
-    }
-
-    updatePeriodicElement(periodicElement: PeriodicElement) {
-        return this.http.post<ValidationError[]>(`${this.applicationService.baseUrl}PeriodicElement/UpdatePeriodicElement`, periodicElement);
+    savePeriodicElement(periodicElement: PeriodicElement) {
+        return this.http.post<ValidationError[]>(`${this.applicationService.baseUrl}PeriodicElement/SavePeriodicElement`, periodicElement);
     }
 
     deletePeriodicElement(periodicElementID: string) {

@@ -27,24 +27,15 @@ namespace NetCore21Angular.Manager.Configuration.Chemistry
             return periodicElementResource.List().DeepCopyTo<Contract.PeriodicElement[]>();
         }
 
-        public Contract.PeriodicElement DetailPeriodicElementByID(Guid periodicElementID)
+        public Contract.PeriodicElementForEdit LoadForEdit(Guid? periodicElementID)
         {
-            return periodicElementResource.DetailPeriodicElementByID(periodicElementID).DeepCopyTo<Contract.PeriodicElement>();
+            Contract.PeriodicElementForEdit periodicElementForEdit = new Contract.PeriodicElementForEdit();
+            periodicElementForEdit.PeriodicElement = periodicElementID.HasValue ? periodicElementResource.DetailPeriodicElementByID(periodicElementID.Value).DeepCopyTo<Contract.PeriodicElement>() : null;
+
+            return periodicElementForEdit;
         }
 
-        public Infrastructure.ValidationError[] CreatePeriodicElement(Contract.PeriodicElement periodicElement)
-        {
-            Infrastructure.ValidationError[] validationErrors = periodicElementValidationEngine.ValidatePeriodicElement(periodicElement.DeepCopyTo<Engine.Validation.Configuration.Contract.PeriodicElement>());
-
-            if (validationErrors.Any())
-                return validationErrors;
-
-            periodicElementResource.SavePeriodicElement(periodicElement.DeepCopyTo<Resource.Configuration.Chemistry.Contract.PeriodicElement>());
-
-            return new Infrastructure.ValidationError[0];
-        }
-
-        public Infrastructure.ValidationError[] UpdatePeriodicElement(Contract.PeriodicElement periodicElement)
+        public Infrastructure.ValidationError[] SavePeriodicElement(Contract.PeriodicElement periodicElement)
         {
             Infrastructure.ValidationError[] validationErrors = periodicElementValidationEngine.ValidatePeriodicElement(periodicElement.DeepCopyTo<Engine.Validation.Configuration.Contract.PeriodicElement>());
 

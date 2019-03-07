@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -50,17 +49,12 @@ namespace NetCore21Angular.Client.Web
                         };
                 });
 
-            // https://docs.microsoft.com/en-us/aspnet/core/security/authorization/limitingidentitybyscheme?view=aspnetcore-2.1&tabs=aspnetcore2x
-            //services.AddAuthorization(options =>
-            //{
-            //    var defaultAuthorizationPolicyBuilder = new Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder(JwtBearerDefaults.AuthenticationScheme);
-            //    defaultAuthorizationPolicyBuilder = defaultAuthorizationPolicyBuilder.RequireAuthenticatedUser();
-
-            //    options.DefaultPolicy = defaultAuthorizationPolicyBuilder.Build();
-            //});
-
             services.AddDbContext<Database.NetCore21AngularDbContext>(options =>
             {
+                //string connectionString = Configuration.GetValue<string>("CONNECTIONSTRING_MSSQL");
+
+                //options.UseSqlServer(connectionString);
+
                 if (Configuration.GetValue("UseMySql", false))
                 {
                     options.UseMySql(Configuration.GetConnectionString("MySqlDefaultConnection"));
@@ -76,7 +70,9 @@ namespace NetCore21Angular.Client.Web
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp/dist";
+                configuration.RootPath = "wwwroot/dist";
+
+                //configuration.RootPath = "ClientApp/dist";
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
@@ -95,6 +91,8 @@ namespace NetCore21Angular.Client.Web
             }
             else
             {
+                UpdateDatabase(app, env);
+
                 app.UseExceptionHandler("/Error");
                 app.UseHsts();
             }
@@ -116,25 +114,40 @@ namespace NetCore21Angular.Client.Web
                 // To learn more about options for serving an Angular SPA from ASP.NET Core,
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
-                spa.Options.SourcePath = "ClientApp";
+                spa.Options.SourcePath = "wwwroot";
 
-                if (env.IsDevelopment())
-                {
-                    spa.UseAngularCliServer(npmScript: "start");
-                }
+                //spa.Options.SourcePath = "ClientApp";
+
+                //if (env.IsDevelopment())
+                //{
+                //    spa.UseAngularCliServer(npmScript: "start");
+                //}
             });
+        }
+
+        private void UpdateDatabase(IApplicationBuilder app, IHostingEnvironment env)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (Database.NetCore21AngularDbContext netCore21AngularDbContext = serviceScope.ServiceProvider.GetService<Database.NetCore21AngularDbContext>())
+                {
+                    netCore21AngularDbContext.Database.Migrate();
+                }
+            }
         }
 
         private void Configure_CompositionRoot(IServiceCollection services)
         {
             // Manager
             services.AddTransient<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager, Manager.Configuration.Chemistry.PeriodicElementManager>();
+            services.AddTransient<Manager.Configuration.IPeopleManager, Manager.Configuration.PeopleManager>();
 
             // Engine
             services.AddTransient<Engine.Validation.Configuration.Contract.IPeriodicElementValidationEngine, Engine.Validation.Configuration.PeriodicElementValidationEngine>();
 
             // Resource
             services.AddTransient<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>();
+            services.AddTransient<Resource.Configuration.IPeopleResource, Resource.Configuration.PeopleResource>();
         }
 
         private void Configure_CompositionRoot_Test(IServiceCollection services)

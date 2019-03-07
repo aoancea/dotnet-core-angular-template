@@ -29,28 +29,21 @@ namespace NetCore21Angular.Client.Web.Controllers
         }
 
         [HttpGet]
-        public Models.PeriodicElement GetPeriodicElementByID(Guid periodicElementID)
+        public Models.PeriodicElementForEdit LoadForEdit(Guid? periodicElementID)
         {
-            return periodicElementManager.DetailPeriodicElementByID(periodicElementID).DeepCopyTo<Models.PeriodicElement>();
+            return periodicElementManager.LoadForEdit(periodicElementID).DeepCopyTo<Models.PeriodicElementForEdit>();
         }
 
         [HttpPost]
-        public Infrastructure.ValidationError[] CreatePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
+        public Infrastructure.ValidationError[] SavePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
         {
-            Manager.Configuration.Chemistry.Contract.PeriodicElement managerPeriodicElement = periodicElement.DeepCopyTo<Manager.Configuration.Chemistry.Contract.PeriodicElement>();
-            managerPeriodicElement.ID = Guid.NewGuid();
-            managerPeriodicElement.Isotopes = new Manager.Configuration.Chemistry.Contract.Isotope[0];
+            if (periodicElement.ID == Guid.Empty)
+                periodicElement.ID = Guid.NewGuid();
 
-            return periodicElementManager.CreatePeriodicElement(managerPeriodicElement);
-        }
-
-        [HttpPost]
-        public Infrastructure.ValidationError[] UpdatePeriodicElement([FromBody]Models.PeriodicElement periodicElement)
-        {
             Manager.Configuration.Chemistry.Contract.PeriodicElement managerPeriodicElement = periodicElement.DeepCopyTo<Manager.Configuration.Chemistry.Contract.PeriodicElement>();
             managerPeriodicElement.Isotopes = new Manager.Configuration.Chemistry.Contract.Isotope[0];
 
-            return periodicElementManager.UpdatePeriodicElement(managerPeriodicElement);
+            return periodicElementManager.SavePeriodicElement(managerPeriodicElement);
         }
 
         [HttpDelete]
