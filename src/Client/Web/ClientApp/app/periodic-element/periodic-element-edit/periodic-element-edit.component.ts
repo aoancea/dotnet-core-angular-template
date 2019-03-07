@@ -22,7 +22,7 @@ export class PeriodicElementEditComponent implements OnInit {
 
     private isEdit: boolean = false;
 
-    private formGroup: FormGroup;
+    public formGroup: FormGroup;
 
     private errorMessage: string;
 
