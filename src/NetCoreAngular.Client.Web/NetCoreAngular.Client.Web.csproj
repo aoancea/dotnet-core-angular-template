@@ -13,7 +13,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.0.0" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="5.6.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -21,6 +24,14 @@
     <Content Remove="$(SpaRoot)**" />
     <None Remove="$(SpaRoot)**" />
     <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Database\NetCore21Angular.Database.csproj" />
+    <ProjectReference Include="..\Engine\Validation\NetCore21Angular.Engine.Validation.csproj" />
+    <ProjectReference Include="..\Infrastructure\Infrastructure\NetCore21Angular.Infrastructure.csproj" />
+    <ProjectReference Include="..\Manager\Configuration\NetCore21Angular.Manager.Configuration.csproj" />
+    <ProjectReference Include="..\Resource\Configuration\NetCore21Angular.Resource.Configuration.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
