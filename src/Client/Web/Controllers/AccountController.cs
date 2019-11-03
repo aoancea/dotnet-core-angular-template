@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using NetCore21Angular.Client.Web.Models.Account;
+using NetCoreAngular.Client.Web.Models.Account;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -11,7 +11,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NetCore21Angular.Client.Web.Controllers
+namespace NetCoreAngular.Client.Web
 {
     [AllowAnonymous]
     public class AccountController : Controller

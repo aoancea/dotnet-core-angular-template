@@ -35,11 +35,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Database\NetCoreAngular.Database.csproj" />
-    <ProjectReference Include="..\Engine\Validation\NetCoreAngular.Engine.Validation.csproj" />
-    <ProjectReference Include="..\Infrastructure\Infrastructure\NetCoreAngular.Infrastructure.csproj" />
-    <ProjectReference Include="..\Manager\Configuration\NetCoreAngular.Manager.Configuration.csproj" />
-    <ProjectReference Include="..\Resource\Configuration\NetCoreAngular.Resource.Configuration.csproj" />
+    <ProjectReference Include="..\..\Database\NetCoreAngular.Database.csproj" />
+    <ProjectReference Include="..\..\Engine\Validation\NetCoreAngular.Engine.Validation.csproj" />
+    <ProjectReference Include="..\..\Infrastructure\Infrastructure\NetCoreAngular.Infrastructure.csproj" />
+    <ProjectReference Include="..\..\Manager\Configuration\NetCoreAngular.Manager.Configuration.csproj" />
+    <ProjectReference Include="..\..\Resource\Configuration\NetCoreAngular.Resource.Configuration.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

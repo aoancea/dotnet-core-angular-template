@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetCore21Angular.Client.Web.Models.Account
+namespace NetCoreAngular.Client.Web.Models.Account
 {
     public class Token
     {

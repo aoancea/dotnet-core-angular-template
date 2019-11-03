@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetCore21Angular.Client.Web.Models
+namespace NetCoreAngular.Client.Web.Models
 {
     public class Person
     {

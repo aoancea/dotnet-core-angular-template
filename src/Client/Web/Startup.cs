@@ -2,10 +2,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,7 @@ using Unity.Interception.InterceptionBehaviors;
 using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
 using Unity.Interception.PolicyInjection.Pipeline;
 
-namespace NetCore21Angular.Client.Web
+namespace NetCoreAngular.Client.Web
 {
     public class Startup
     {
@@ -49,12 +49,8 @@ namespace NetCore21Angular.Client.Web
                         };
                 });
 
-            services.AddDbContext<Database.NetCore21AngularDbContext>(options =>
+            services.AddDbContext<Database.NetCoreAngularDbContext>(options =>
             {
-                //string connectionString = Configuration.GetValue<string>("CONNECTIONSTRING_MSSQL");
-
-                //options.UseSqlServer(connectionString);
-
                 if (Configuration.GetValue("UseMySql", false))
                 {
                     options.UseMySql(Configuration.GetConnectionString("MySqlDefaultConnection"));
@@ -65,25 +61,24 @@ namespace NetCore21Angular.Client.Web
                 }
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
+            services.AddControllersWithViews();
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "wwwroot/dist";
-
                 //configuration.RootPath = "ClientApp/dist";
+
+                configuration.RootPath = "wwwroot/dist";
             });
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                .AddDefaultTokenProviders()
-               .AddEntityFrameworkStores<Database.NetCore21AngularDbContext>();
+               .AddEntityFrameworkStores<Database.NetCoreAngularDbContext>();
 
             Configure_CompositionRoot(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
             {
@@ -91,9 +86,10 @@ namespace NetCore21Angular.Client.Web
             }
             else
             {
-                UpdateDatabase(app, env);
+                UpdateDatabase(app);
 
                 app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -102,11 +98,15 @@ namespace NetCore21Angular.Client.Web
             app.UseSpaStaticFiles();
 
             app.UseAuthentication();
-            app.UseMvc(routes =>
+            app.UseAuthorization();
+
+            app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
             {
-                routes.MapRoute(
+                endpoints.MapControllerRoute(
                     name: "default",
-                    template: "{controller}/{action=Index}/{id?}");
+                    pattern: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>
@@ -115,21 +115,15 @@ namespace NetCore21Angular.Client.Web
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "wwwroot";
-
-                //spa.Options.SourcePath = "ClientApp";
-
-                //if (env.IsDevelopment())
-                //{
-                //    spa.UseAngularCliServer(npmScript: "start");
-                //}
             });
         }
 
-        private void UpdateDatabase(IApplicationBuilder app, IHostingEnvironment env)
+
+        private void UpdateDatabase(IApplicationBuilder app)
         {
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
-                using (Database.NetCore21AngularDbContext netCore21AngularDbContext = serviceScope.ServiceProvider.GetService<Database.NetCore21AngularDbContext>())
+                using (Database.NetCoreAngularDbContext netCore21AngularDbContext = serviceScope.ServiceProvider.GetService<Database.NetCoreAngularDbContext>())
                 {
                     netCore21AngularDbContext.Database.Migrate();
                 }
@@ -156,7 +150,7 @@ namespace NetCore21Angular.Client.Web
             container.AddNewExtension<Interception>();
 
             // Database
-            container.RegisterType<Database.NetCore21AngularDbContext>(new InjectionFactory((x) => services.BuildServiceProvider().GetService<Database.NetCore21AngularDbContext>()));
+            container.RegisterType<Database.NetCoreAngularDbContext>(new InjectionFactory((x) => services.BuildServiceProvider().GetService<Database.NetCoreAngularDbContext>()));
 
             // Resource
             container.RegisterType<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<TransactionInterceptionBehavior>());
