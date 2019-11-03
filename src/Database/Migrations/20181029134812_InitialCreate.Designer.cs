@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetCore21Angular.Database;
+using NetCoreAngular.Database;
 
-namespace NetCore21Angular.Database.Migrations
+namespace NetCoreAngular.Database.Migrations
 {
-    [DbContext(typeof(NetCore21AngularDbContext))]
+    [DbContext(typeof(NetCoreAngularDbContext))]
     [Migration("20181029134812_InitialCreate")]
     partial class InitialCreate
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NetCore21Angular.Database.Migrations
+namespace NetCoreAngular.Database.Migrations
 {
     public partial class Add_Isotopes_Table : Migration
     {

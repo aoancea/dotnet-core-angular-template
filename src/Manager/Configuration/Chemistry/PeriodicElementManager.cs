@@ -2,7 +2,7 @@
 using System;
 using System.Linq;
 
-namespace NetCore21Angular.Manager.Configuration.Chemistry
+namespace NetCoreAngular.Manager.Configuration.Chemistry
 {
     public class PeriodicElementManager : Contract.IPeriodicElementManager
     {

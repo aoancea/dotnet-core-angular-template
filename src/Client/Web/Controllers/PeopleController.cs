@@ -2,7 +2,7 @@
 using Runtime.Mapper;
 using System;
 
-namespace NetCore21Angular.Client.Web.Controllers
+namespace NetCoreAngular.Client.Web
 {
     public class PeopleController : Controller
     {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace NetCore21Angular.Engine.Validation.Configuration
+namespace NetCoreAngular.Engine.Validation.Configuration
 {
     public class PeriodicElementValidationEngine : Contract.IPeriodicElementValidationEngine
     {

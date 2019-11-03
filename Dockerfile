@@ -24,4 +24,4 @@ RUN ng build
 RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
-ENTRYPOINT ["dotnet", "out/NetCore21Angular.Client.Web.dll"]
+ENTRYPOINT ["dotnet", "out/NetCoreAngular.Client.Web.dll"]

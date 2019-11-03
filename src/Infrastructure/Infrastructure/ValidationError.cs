@@ -1,4 +1,4 @@
-﻿namespace NetCore21Angular.Infrastructure
+﻿namespace NetCoreAngular.Infrastructure
 {
     public class ValidationError
     {

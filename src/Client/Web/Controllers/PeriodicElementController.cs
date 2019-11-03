@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Runtime.Mapper;
 using System;
 
-namespace NetCore21Angular.Client.Web.Controllers
+namespace NetCoreAngular.Client.Web
 {
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class PeriodicElementController : Controller

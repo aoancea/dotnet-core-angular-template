@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetCore21Angular.Database;
+using NetCoreAngular.Database;
 
-namespace NetCore21Angular.Database.Migrations
+namespace NetCoreAngular.Database.Migrations
 {
-    [DbContext(typeof(NetCore21AngularDbContext))]
+    [DbContext(typeof(NetCoreAngularDbContext))]
     [Migration("20181102092739_Add_Isotopes_Table")]
     partial class Add_Isotopes_Table
     {
@@ -182,7 +182,7 @@ namespace NetCore21Angular.Database.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("NetCore21Angular.Database.Models.Isotope", b =>
+            modelBuilder.Entity("NetCoreAngular.Database.Models.Isotope", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
@@ -206,7 +206,7 @@ namespace NetCore21Angular.Database.Migrations
                     b.ToTable("Isotopes");
                 });
 
-            modelBuilder.Entity("NetCore21Angular.Database.Models.PeriodicElement", b =>
+            modelBuilder.Entity("NetCoreAngular.Database.Models.PeriodicElement", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();

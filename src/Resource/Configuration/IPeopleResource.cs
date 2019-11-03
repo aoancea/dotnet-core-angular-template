@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetCore21Angular.Resource.Configuration
+namespace NetCoreAngular.Resource.Configuration
 {
     public interface IPeopleResource
     {
