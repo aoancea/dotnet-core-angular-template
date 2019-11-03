@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetCore21Angular.Database;
+using NetCoreAngular.Database;
 
-namespace NetCore21Angular.Database.Migrations
+namespace NetCoreAngular.Database.Migrations
 {
-    [DbContext(typeof(NetCore21AngularDbContext))]
+    [DbContext(typeof(NetCoreAngularDbContext))]
     [Migration("20190224114850_Add_People_Table")]
     partial class Add_People_Table
     {
@@ -182,7 +182,7 @@ namespace NetCore21Angular.Database.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("NetCore21Angular.Database.Models.Isotope", b =>
+            modelBuilder.Entity("NetCoreAngular.Database.Models.Isotope", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
@@ -208,7 +208,7 @@ namespace NetCore21Angular.Database.Migrations
                     b.ToTable("Isotopes");
                 });
 
-            modelBuilder.Entity("NetCore21Angular.Database.Models.PeriodicElement", b =>
+            modelBuilder.Entity("NetCoreAngular.Database.Models.PeriodicElement", b =>
                 {
                     b.Property<Guid>("ID")
                         .ValueGeneratedOnAdd();
@@ -226,7 +226,7 @@ namespace NetCore21Angular.Database.Migrations
                     b.ToTable("PeriodicElements");
                 });
 
-            modelBuilder.Entity("NetCore21Angular.Database.Models.Person", b =>
+            modelBuilder.Entity("NetCoreAngular.Database.Models.Person", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd();

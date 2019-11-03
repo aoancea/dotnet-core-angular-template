@@ -41,7 +41,7 @@ namespace NetCoreAngular.Client.Web
                         };
                 });
 
-            services.AddDbContext<NetCore21Angular.Database.NetCore21AngularDbContext>(options =>
+            services.AddDbContext<Database.NetCoreAngularDbContext>(options =>
             {
                 //string connectionString = Configuration.GetValue<string>("CONNECTIONSTRING_MSSQL");
 
@@ -68,7 +68,7 @@ namespace NetCoreAngular.Client.Web
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                .AddDefaultTokenProviders()
-               .AddEntityFrameworkStores<NetCore21Angular.Database.NetCore21AngularDbContext>();
+               .AddEntityFrameworkStores<Database.NetCoreAngularDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

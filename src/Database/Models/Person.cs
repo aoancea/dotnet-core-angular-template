@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetCore21Angular.Database.Models
+namespace NetCoreAngular.Database.Models
 {
     public class Person
     {

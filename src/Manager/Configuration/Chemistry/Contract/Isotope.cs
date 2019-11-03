@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetCore21Angular.Manager.Configuration.Chemistry.Contract
+namespace NetCoreAngular.Manager.Configuration.Chemistry.Contract
 {
     public class Isotope
     {

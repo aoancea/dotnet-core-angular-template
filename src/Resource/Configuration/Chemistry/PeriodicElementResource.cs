@@ -1,27 +1,27 @@
-﻿using NetCore21Angular.Database;
+﻿using NetCoreAngular.Database;
 using Runtime.Mapper;
 using System;
 using System.Linq;
 
-namespace NetCore21Angular.Resource.Configuration.Chemistry
+namespace NetCoreAngular.Resource.Configuration.Chemistry
 {
     public class PeriodicElementResource : Contract.IPeriodicElementResource
     {
-        private NetCore21AngularDbContext netCore21AngularDbContext;
+        private NetCoreAngularDbContext NetCoreAngularDbContext;
 
-        public PeriodicElementResource(NetCore21AngularDbContext netCore21AngularDbContext)
+        public PeriodicElementResource(NetCoreAngularDbContext NetCoreAngularDbContext)
         {
-            this.netCore21AngularDbContext = netCore21AngularDbContext;
+            this.NetCoreAngularDbContext = NetCoreAngularDbContext;
         }
 
         public Contract.PeriodicElementHeader DetailPeriodicElementHeaderByPosition(int position)
         {
-            return netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElementHeader>();
+            return NetCoreAngularDbContext.PeriodicElements.FirstOrDefault(x => x.Position == position).DeepCopyTo<Contract.PeriodicElementHeader>();
         }
 
         public Contract.PeriodicElement[] List()
         {
-            Database.Models.PeriodicElement[] dbPeriodicElements = netCore21AngularDbContext.PeriodicElements.ToArray();
+            Database.Models.PeriodicElement[] dbPeriodicElements = NetCoreAngularDbContext.PeriodicElements.ToArray();
 
             // Logic for fetching data is the resposibility of the Resource => thus we have this here!
             if (dbPeriodicElements.Length == 0)
@@ -46,47 +46,47 @@ namespace NetCore21Angular.Resource.Configuration.Chemistry
 
         public Contract.PeriodicElement DetailPeriodicElementByID(Guid periodicElementID)
         {
-            Contract.PeriodicElement resourcePeriodicElement = netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElementID).DeepCopyTo<Contract.PeriodicElement>();
-            resourcePeriodicElement.Isotopes = netCore21AngularDbContext.Isotopes.Where(x => x.PeriodicElementID == periodicElementID).ToArray().DeepCopyTo<Contract.Isotope[]>();
+            Contract.PeriodicElement resourcePeriodicElement = NetCoreAngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElementID).DeepCopyTo<Contract.PeriodicElement>();
+            resourcePeriodicElement.Isotopes = NetCoreAngularDbContext.Isotopes.Where(x => x.PeriodicElementID == periodicElementID).ToArray().DeepCopyTo<Contract.Isotope[]>();
 
             return resourcePeriodicElement;
         }
 
         public void SavePeriodicElement(Contract.PeriodicElement periodicElement)
         {
-            Database.Models.PeriodicElement dbPeriodicElement = netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElement.ID);
+            Database.Models.PeriodicElement dbPeriodicElement = NetCoreAngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElement.ID);
 
             if (dbPeriodicElement == null)
             {
-                netCore21AngularDbContext.PeriodicElements.Add(dbPeriodicElement = new Database.Models.PeriodicElement() { ID = periodicElement.ID });
+                NetCoreAngularDbContext.PeriodicElements.Add(dbPeriodicElement = new Database.Models.PeriodicElement() { ID = periodicElement.ID });
             }
 
             Mapper.Map(periodicElement, dbPeriodicElement);
 
             foreach (Contract.Isotope isotope in periodicElement.Isotopes)
             {
-                Database.Models.Isotope dbIsotope = netCore21AngularDbContext.Isotopes.FirstOrDefault(x => x.ID == isotope.ID);
+                Database.Models.Isotope dbIsotope = NetCoreAngularDbContext.Isotopes.FirstOrDefault(x => x.ID == isotope.ID);
 
                 if (dbIsotope == null)
                 {
-                    netCore21AngularDbContext.Isotopes.Add(dbIsotope = new Database.Models.Isotope() { ID = isotope.ID });
+                    NetCoreAngularDbContext.Isotopes.Add(dbIsotope = new Database.Models.Isotope() { ID = isotope.ID });
                 }
 
                 Mapper.Map(isotope, dbIsotope);
             }
 
-            netCore21AngularDbContext.SaveChanges();
+            NetCoreAngularDbContext.SaveChanges();
         }
 
         public void DeletePeriodicElement(Guid periodicElementID)
         {
-            Database.Models.PeriodicElement dbPeriodicElement = netCore21AngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElementID);
+            Database.Models.PeriodicElement dbPeriodicElement = NetCoreAngularDbContext.PeriodicElements.FirstOrDefault(x => x.ID == periodicElementID);
 
             if (dbPeriodicElement != null)
             {
-                netCore21AngularDbContext.PeriodicElements.Remove(dbPeriodicElement);
+                NetCoreAngularDbContext.PeriodicElements.Remove(dbPeriodicElement);
 
-                netCore21AngularDbContext.SaveChanges();
+                NetCoreAngularDbContext.SaveChanges();
             }
         }
     }

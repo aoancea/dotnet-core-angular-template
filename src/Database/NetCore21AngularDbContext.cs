@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace NetCore21Angular.Database
+namespace NetCoreAngular.Database
 {
-    public class NetCore21AngularDbContext : IdentityDbContext
+    public class NetCoreAngularDbContext : IdentityDbContext
     {
         public DbSet<Models.PeriodicElement> PeriodicElements { get; set; }
 
@@ -11,7 +11,7 @@ namespace NetCore21Angular.Database
 
         public DbSet<Models.Person> People { get; set; }
 
-        public NetCore21AngularDbContext(DbContextOptions<NetCore21AngularDbContext> options)
+        public NetCoreAngularDbContext(DbContextOptions<NetCoreAngularDbContext> options)
             : base(options)
         { }
     }

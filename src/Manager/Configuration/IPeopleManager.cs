@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetCore21Angular.Manager.Configuration
+namespace NetCoreAngular.Manager.Configuration
 {
     public interface IPeopleManager
     {

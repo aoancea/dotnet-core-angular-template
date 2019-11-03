@@ -1,6 +1,6 @@
 ﻿using Runtime.Mapper;
 
-namespace NetCore21Angular.Manager.Configuration
+namespace NetCoreAngular.Manager.Configuration
 {
     public class PeopleManager : IPeopleManager
     {

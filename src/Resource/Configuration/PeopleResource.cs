@@ -1,35 +1,35 @@
-﻿using NetCore21Angular.Database;
+﻿using NetCoreAngular.Database;
 using Runtime.Mapper;
 using System.Linq;
 
-namespace NetCore21Angular.Resource.Configuration
+namespace NetCoreAngular.Resource.Configuration
 {
     public class PeopleResource : IPeopleResource
     {
-        private NetCore21AngularDbContext netCore21AngularDbContext;
+        private NetCoreAngularDbContext NetCoreAngularDbContext;
 
-        public PeopleResource(NetCore21AngularDbContext netCore21AngularDbContext)
+        public PeopleResource(NetCoreAngularDbContext NetCoreAngularDbContext)
         {
-            this.netCore21AngularDbContext = netCore21AngularDbContext;
+            this.NetCoreAngularDbContext = NetCoreAngularDbContext;
         }
 
         public Person[] List()
         {
-            return netCore21AngularDbContext.People.ToArray().DeepCopyTo<Person[]>();
+            return NetCoreAngularDbContext.People.ToArray().DeepCopyTo<Person[]>();
         }
 
         public void SavePerson(Person person)
         {
-            Database.Models.Person dbPerson = netCore21AngularDbContext.People.FirstOrDefault(x => x.Id == person.Id);
+            Database.Models.Person dbPerson = NetCoreAngularDbContext.People.FirstOrDefault(x => x.Id == person.Id);
 
             if (dbPerson == null)
             {
-                netCore21AngularDbContext.People.Add(dbPerson = new Database.Models.Person() { Id = person.Id });
+                NetCoreAngularDbContext.People.Add(dbPerson = new Database.Models.Person() { Id = person.Id });
             }
 
             Mapper.Map(person, dbPerson);
 
-            netCore21AngularDbContext.SaveChanges();
+            NetCoreAngularDbContext.SaveChanges();
         }
     }
 }

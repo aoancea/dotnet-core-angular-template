@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NetCore21Angular.Database.Migrations
+namespace NetCoreAngular.Database.Migrations
 {
     public partial class InitialCreate : Migration
     {

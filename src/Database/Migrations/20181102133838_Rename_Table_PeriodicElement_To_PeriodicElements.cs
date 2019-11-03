@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace NetCore21Angular.Database.Migrations
+namespace NetCoreAngular.Database.Migrations
 {
     public partial class Rename_Table_PeriodicElement_To_PeriodicElements : Migration
     {
