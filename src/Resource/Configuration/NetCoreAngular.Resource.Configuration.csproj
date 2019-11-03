@@ -9,7 +9,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Database\NetCore21Angular.Database.csproj" />
+    <ProjectReference Include="..\..\Database\NetCoreAngular.Database.csproj" />
   </ItemGroup>
 
 </Project>
