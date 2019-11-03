@@ -332,3 +332,5 @@ ASALocalRun/
 *\package-lock.json
 *\dist
 *\appsettings.*.json
+
+/src/Client/Web/out
