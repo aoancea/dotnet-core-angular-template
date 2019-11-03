@@ -17,10 +17,23 @@ import { CoreModule } from './core/core.module';
 
 import { AuthenticationGuard } from './core/guards/authentication.guard';
 
+import { RegistrationComponent } from './registration/registration.component';
+import { LoginComponent } from './login/login.component';
+import { ExampleAppComponent } from './example-app/example-app.component';
+
 const routes: Routes = [
-    { path: '', component: HomeComponent, pathMatch: 'full' },
-    { path: 'counter', component: CounterComponent },
-    { path: 'fetch-data', component: FetchDataComponent },
+    { path: 'register', component: RegistrationComponent },
+    { path: 'login', component: LoginComponent },
+    {
+        path: '', component: ExampleAppComponent,
+        children: [
+            { path: '', component: HomeComponent, pathMatch: 'full' },
+            { path: 'counter', component: CounterComponent },
+            { path: 'fetch-data', component: FetchDataComponent },
+
+            { path: 'periodic-elements', loadChildren: './periodic-element/periodic-element.module#PeriodicElementModule', canActivate: [AuthenticationGuard] }
+        ]
+    }
 ];
 
 @NgModule({
@@ -29,7 +42,10 @@ const routes: Routes = [
         NavMenuComponent,
         HomeComponent,
         CounterComponent,
-        FetchDataComponent
+        FetchDataComponent,
+        RegistrationComponent,
+        LoginComponent,
+        ExampleAppComponent
     ],
     imports: [
         BrowserAnimationsModule,
