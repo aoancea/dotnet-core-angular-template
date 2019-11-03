@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2042
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manager", "Manager", "{466079D7-1A48-4579-868E-815D6B0D29B9}"
 EndProject
@@ -36,6 +36,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore21Angular.Infrastruc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NetCore21Angular.Engine.Validation", "Engine\Validation\NetCore21Angular.Engine.Validation.csproj", "{9318646C-4B69-4705-996B-19B12F1F2CA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetCoreAngular.Client.Web", "NetCoreAngular.Client.Web\NetCoreAngular.Client.Web.csproj", "{F5E669AF-1BB5-4E87-83B5-713836258F64}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{9318646C-4B69-4705-996B-19B12F1F2CA0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9318646C-4B69-4705-996B-19B12F1F2CA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9318646C-4B69-4705-996B-19B12F1F2CA0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F5E669AF-1BB5-4E87-83B5-713836258F64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5E669AF-1BB5-4E87-83B5-713836258F64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5E669AF-1BB5-4E87-83B5-713836258F64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5E669AF-1BB5-4E87-83B5-713836258F64}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{EF9CBC37-C26E-419B-8C03-9C5BA5E97631} = {AEFEB6CA-4C5E-452A-ADA9-AB16564C3B08}
 		{28048B71-12CC-4F33-A1B3-CF4E6BCDB912} = {1463A5F5-673A-40AB-B78A-B44BB0022C12}
 		{9318646C-4B69-4705-996B-19B12F1F2CA0} = {C6ABC032-9B9E-4E17-8940-DBA3FF620372}
+		{F5E669AF-1BB5-4E87-83B5-713836258F64} = {AEFEB6CA-4C5E-452A-ADA9-AB16564C3B08}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {16918FB6-4931-4E1E-8738-E211F12A2C5B}
