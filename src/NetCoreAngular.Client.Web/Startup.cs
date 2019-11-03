@@ -8,7 +8,15 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Text;
+using Unity;
+using Unity.Injection;
+using Unity.Interception.ContainerIntegration;
+using Unity.Interception.InterceptionBehaviors;
+using Unity.Interception.Interceptors.InstanceInterceptors.InterfaceInterception;
+using Unity.Interception.PolicyInjection.Pipeline;
 
 namespace NetCoreAngular.Client.Web
 {
@@ -43,10 +51,6 @@ namespace NetCoreAngular.Client.Web
 
             services.AddDbContext<Database.NetCoreAngularDbContext>(options =>
             {
-                //string connectionString = Configuration.GetValue<string>("CONNECTIONSTRING_MSSQL");
-
-                //options.UseSqlServer(connectionString);
-
                 if (Configuration.GetValue("UseMySql", false))
                 {
                     options.UseMySql(Configuration.GetConnectionString("MySqlDefaultConnection"));
@@ -69,6 +73,8 @@ namespace NetCoreAngular.Client.Web
             services.AddIdentity<IdentityUser, IdentityRole>()
                .AddDefaultTokenProviders()
                .AddEntityFrameworkStores<Database.NetCoreAngularDbContext>();
+
+            Configure_CompositionRoot(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,6 +86,8 @@ namespace NetCoreAngular.Client.Web
             }
             else
             {
+                UpdateDatabase(app);
+
                 app.UseExceptionHandler("/Error");
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
@@ -89,10 +97,8 @@ namespace NetCoreAngular.Client.Web
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 
-            //if (!env.IsDevelopment())
-            //{
-            //    app.UseSpaStaticFiles();
-            //}
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseRouting();
 
@@ -109,14 +115,92 @@ namespace NetCoreAngular.Client.Web
                 // see https://go.microsoft.com/fwlink/?linkid=864501
 
                 spa.Options.SourcePath = "wwwroot";
-
-                //spa.Options.SourcePath = "ClientApp";
-
-                //if (env.IsDevelopment())
-                //{
-                //    spa.UseAngularCliServer(npmScript: "start");
-                //}
             });
+        }
+
+
+        private void UpdateDatabase(IApplicationBuilder app)
+        {
+            using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                using (Database.NetCoreAngularDbContext netCore21AngularDbContext = serviceScope.ServiceProvider.GetService<Database.NetCoreAngularDbContext>())
+                {
+                    netCore21AngularDbContext.Database.Migrate();
+                }
+            }
+        }
+
+        private void Configure_CompositionRoot(IServiceCollection services)
+        {
+            // Manager
+            services.AddTransient<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager, Manager.Configuration.Chemistry.PeriodicElementManager>();
+            services.AddTransient<Manager.Configuration.IPeopleManager, Manager.Configuration.PeopleManager>();
+
+            // Engine
+            services.AddTransient<Engine.Validation.Configuration.Contract.IPeriodicElementValidationEngine, Engine.Validation.Configuration.PeriodicElementValidationEngine>();
+
+            // Resource
+            services.AddTransient<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>();
+            services.AddTransient<Resource.Configuration.IPeopleResource, Resource.Configuration.PeopleResource>();
+        }
+
+        private void Configure_CompositionRoot_Test(IServiceCollection services)
+        {
+            UnityContainer container = new UnityContainer();
+            container.AddNewExtension<Interception>();
+
+            // Database
+            container.RegisterType<Database.NetCoreAngularDbContext>(new InjectionFactory((x) => services.BuildServiceProvider().GetService<Database.NetCoreAngularDbContext>()));
+
+            // Resource
+            container.RegisterType<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource, Resource.Configuration.Chemistry.PeriodicElementResource>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<TransactionInterceptionBehavior>());
+            services.AddTransient((x) => container.Resolve<Resource.Configuration.Chemistry.Contract.IPeriodicElementResource>());
+
+            // Engine
+
+
+            // Manager
+            container.RegisterType<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager, Manager.Configuration.Chemistry.PeriodicElementManager>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<TransactionInterceptionBehavior>());
+            services.AddTransient((x) => container.Resolve<Manager.Configuration.Chemistry.Contract.IPeriodicElementManager>());
+        }
+
+        private class TransactionInterceptionBehavior : IInterceptionBehavior
+        {
+            public IMethodReturn Invoke(IMethodInvocation input, GetNextInterceptionBehaviorDelegate getNext)
+            {
+                MethodInfo methodInfo = input.MethodBase as MethodInfo;
+
+                TransactionFlowAttribute transactionFlowAttribute = methodInfo.GetCustomAttribute<TransactionFlowAttribute>();
+
+                var result = getNext()(input, getNext);
+
+                return result;
+            }
+
+            public IEnumerable<Type> GetRequiredInterfaces()
+            {
+                return Type.EmptyTypes;
+            }
+
+            public bool WillExecute { get { return true; } }
+        }
+
+
+        public class TransactionFlowAttribute : Attribute
+        {
+            public TransactionFlowOption TransactionFlowOption { get; }
+
+            public TransactionFlowAttribute(TransactionFlowOption transactionFlowOption)
+            {
+                TransactionFlowOption = transactionFlowOption;
+            }
+        }
+
+        public enum TransactionFlowOption
+        {
+            Mandatory,
+            Allowed,
+            NotAllowed
         }
     }
 }
