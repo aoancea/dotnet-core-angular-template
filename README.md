@@ -1,21 +1,24 @@
 # dotnet-core-angular-template
 
 ## Installation steps
- * `cd ../src/Client/Web`
- * `npm install`
- * `ng build`
+
+#### Angular installation steps
+Open the `cmd` inside `Voluntariat/ClientApp` then run the following commands:
+* `npm install`
+* `ng build`
+
+#### Web app installation steps
+Open the `cmd` inside repository **root** then run the following commands:
+ * `dotnet build`
  * `dotnet ef database update`
- * F5
+ * `dotnet run`
 
-## Architectural style
- * IDesign
-
-## Technology stack
+#### Technology stack
  * ASP.NET Core
- * Angular 7
  * MsSql Server
  * Entity Framework Core
- * Angular Material Design
+ * Angular 9
+ * Angular Material Design 9
  
  
 ## Useful commands/templates
@@ -38,7 +41,7 @@
 
 **Start ASP.NET Core App after publish to specific folder**
 
-`dotnet run output/NetCore21Angular.Client.Web.dll`
+`dotnet run output/Voluntariat.dll`
 
 **Start ASP.NET Core App in Production mode**
 
